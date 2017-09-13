@@ -4,9 +4,9 @@ module.exports = function(grunt) {
       target: {
         files: [{
           expand: true,
-          cwd: 'public/css/',
+          cwd: 'css/',
           src: ['*.css', '!*.min.css'],
-          dest: 'public/css/',
+          dest: 'css/',
           ext: '.min.css'
         }]
       }
@@ -22,21 +22,29 @@ module.exports = function(grunt) {
      }
    }
  },
- jshint:{
-   files:["*.js", "js/script.js"],
-   options: {
-     globals: {
-       jQuery: true
+ sass: {                              // Task
+   dist: {                            // Target
+     options: {                       // Target options
+       style: 'expanded'
      },
+     files: {                         // Dictionary of files
+       'css/style.css': 'css/stlye.scss'
+     }
    }
  },
+
  watch: {
+   sass:{
+     files["css/style.scss"],
+     tasks["sass"]
+   },
    cssmin:{
      files:["css/style.css"],
      tasks:["cssmin"]
    }
 
-},
+
+}
   });
 
 
@@ -44,9 +52,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.registerTask("default", ["cssmin", "uglify"]);
-  grunt.registerTask("cssmin", ["cssmin"]);
-    grunt.registerTask("hint", ["jshint"]);
-        grunt.registerTask("watch", ["cssmin"]);
+
+  grunt.registerTask("default", ["cssmin", "uglify", "sass",]);
+
+        grunt.registerTask("watchIT", ["watch"]);
 };
