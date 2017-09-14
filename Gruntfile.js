@@ -28,15 +28,15 @@ module.exports = function(grunt) {
        style: 'expanded'
      },
      files: {                         // Dictionary of files
-       'css/style.css': 'css/stlye.scss'
+       'css/style.css': 'scss/style.scss'
      }
    }
  },
 
  watch: {
    sass:{
-     files["css/style.scss"],
-     tasks["sass"]
+     files:["scss/style.scss"],
+     tasks:["sass"]
    },
    cssmin:{
      files:["css/style.css"],
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask("default", ["cssmin", "uglify", "sass",]);
+  grunt.registerTask("default", ["sass", "uglify", "cssmin"]);
 
-        grunt.registerTask("watchIT", ["watch"]);
+  grunt.registerTask("watchIT", ["watch"]);
 };
