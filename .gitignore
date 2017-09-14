@@ -1,1 +1,9 @@
+node_modules
+.DS_Store
+=~
 .idea
+.sass-cache
+path/to
+path
+=~/node/bin
+=~/node
