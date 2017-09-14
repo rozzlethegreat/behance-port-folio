@@ -2,4 +2,7 @@ node_modules
 .DS_Store
 =~
 .sass-cache
+path/to
 path
+=~/node/bin
+=~/node
