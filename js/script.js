@@ -1,49 +1,127 @@
-
-
-	$('#nav-icon2').click(function(){
-		$(this).toggleClass('open');
-	});
-
-var pagetop, menu, yPos, logo;
+var pagetop, menu, yPos, logo, APIKey, DesignersProfile;
+var designerIDs = new Array();
+var projectIDs = new Array();
 var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner");
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
 window.addEventListener("scroll", yScroll);
-function yScroll(){
+
+function yScroll() {
   logo = document.getElementById('logo');
-	pagetop = document.getElementById('pagetop');
-	menu = document.getElementById('menu');
+  pagetop = document.getElementById('pagetop');
+  menu = document.getElementById('menu');
 
-	yPos = window.pageYOffset;
-	if(yPos > 50){
-      pagetop.style.backgroundColor ="#fff";
-		pagetop.style.height = "90px";
-		pagetop.style.paddingTop = "8px";
-      logo.style.color="#DA1932";
-      logo.style.fontSize="60px";
-      for (var i = 0; i < hamburger.length; i++) {
-        hamburger[i].style.backgroundColor= "#22327B";
-      }
-
-
-
-
-	} else {
-  pagetop.style.backgroundColor ="transparent";
-		pagetop.style.height = "120px";
-		pagetop.style.paddingTop = "30px";
-    logo.style.color="#fff";
-    logo.style.fontSize="100px";
+  yPos = window.pageYOffset;
+  if (yPos > 50) {
+    pagetop.style.backgroundColor = "#fff";
+    pagetop.style.height = "90px";
+    pagetop.style.paddingTop = "8px";
+    logo.style.color = "#DA1932";
+    logo.style.fontSize = "60px";
     for (var i = 0; i < hamburger.length; i++) {
-      hamburger[i].style.backgroundColor= "#fff";
+      hamburger[i].style.backgroundColor = "#22327B";
     }
-
-
-	}
+  } else {
+    pagetop.style.backgroundColor = "transparent";
+    pagetop.style.height = "120px";
+    pagetop.style.paddingTop = "30px";
+    logo.style.color = "#fff";
+    logo.style.fontSize = "100px";
+    for (var i = 0; i < hamburger.length; i++) {
+      hamburger[i].style.backgroundColor = "#fff";
+    }
+  }
 }
-
+$('#nav-icon2').click(function() {
+  $(this).toggleClass('open');
+});
 $('.grid').masonry({
   itemSelector: '.grid-item',
   columnWidth: 200
 });
+// ***REQUESTS*** //
+$.ajax({
+  url: "./config.json",
+  dataType: "json",
+  beforeSend: function(xhr) {
+    if (xhr.overrideMimeType) {
+      xhr.overrideMimeType("application/json");
+    }
+
+  },
+  success: function(DataFromJson) {
+    DesignersProfile = DataFromJson.Designers;
+    APIKey = DataFromJson.accessToken;
+    getRippedDesigners();
+  },
+  error: function() {
+    console.log("Something Went Wrong");
+  }
+})
+
+function getRippedDesigners() {
+  $.ajax({
+    url: "http://www.behance.net/v2/users/" + DesignersProfile + "/following?client_id=" + APIKey,
+    dataType: "jsonp",
+    success: function(DataFromJson) {
+      for (var i = 0; i < DataFromJson.following.length; i++) {
+        designerIDs.push(DataFromJson.following[i].id);
+      }
+      getProjects();
+    },
+    error: function() {
+      console.log("Something Went Wrong");
+    }
+  })
+}
+
+function getProjects() {
+
+		for (var i = 0; i < designerIDs.length; i++) {
+    $.ajax({
+
+      url: "http://www.behance.net/v2/users/" + designerIDs[i] + "/projects?client_id=" + APIKey,
+      dataType: "jsonp",
+      success: function(DataFromJson) {
+				projectIDs.push(DataFromJson.projects[i].id);
+				if (projectIDs.length > 8) {
+					getProjectImg();
+					console.log("oi");
+				}
+
+      },
+      error: function() {
+        console.log("Something Went Wrong");
+
+      }
+
+    })
+  }
+
+
+		// console.log(projectIDs);
+		// getProjectImg();
+    //
+
+}
+
+
+function getProjectImg(){
+	console.log(projectIDs.length);
+for (var i = 0; i < projectIDs.length; i++) {
+	$.ajax({
+		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
+		dataType: "jsonp",
+		success: function(DataFromJson) {
+			console.log(DataFromJson);
+			console.log("here2");
+		},
+		error: function() {
+			console.log("Something Went Wrong");
+
+		}
+
+	})
+}
+}
