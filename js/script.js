@@ -84,10 +84,10 @@ function getProjects() {
       url: "http://www.behance.net/v2/users/" + designerIDs[i] + "/projects?client_id=" + APIKey,
       dataType: "jsonp",
       success: function(DataFromJson) {
-				projectIDs.push(DataFromJson.projects[i].id);
-				if (projectIDs.length > 8) {
+				console.log(DataFromJson);
+				projectIDs.push(DataFromJson.projects[0].id);
+				if (projectIDs.length > 11) {
 					getProjectImg();
-					console.log("oi");
 				}
 
       },
@@ -99,11 +99,6 @@ function getProjects() {
     })
   }
 
-
-		// console.log(projectIDs);
-		// getProjectImg();
-    //
-
 }
 
 
@@ -114,8 +109,8 @@ for (var i = 0; i < projectIDs.length; i++) {
 		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
 		dataType: "jsonp",
 		success: function(DataFromJson) {
-			console.log(DataFromJson);
-			console.log("here2");
+			console.log(DataFromJson.project.covers.original);
+$('.grid').append("<img class='grid-item' src="+DataFromJson.project.covers.original+">")
 		},
 		error: function() {
 			console.log("Something Went Wrong");
