@@ -27,6 +27,7 @@ h1{
 }
 
 .info{
+  padding: 40px;
   width: 45%;
   margin: 20px auto;
   font-family: 'Oxygen', sans-serif;
@@ -62,5 +63,26 @@ h1{
   height: 7px;
   background-color: #DA1932;
   display: inline-block;
+}
 
+.wrapper{
+  text-align: center;
+}
+
+.boldLine{
+  width: 1100px;
+  height: 7px;
+  background-color: black;
+  display: inline-block;
+}
+
+.title{
+  font-family: 'Raleway', sans-serif;
+  font-size: 4em;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+.behance{
+  height: 1200px;
 }
