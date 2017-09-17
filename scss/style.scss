@@ -63,19 +63,21 @@ float: left;
 .bigText{
   width: 40%;
   display: inline-block;
-  margin-left: 25px;
+  margin-left: 40px;
   vertical-align: top;
 }
 
 .topText {
   height: 30px;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .boldText {
-  height: 100px;
-  font-size: 1.3em;
+  width: 400px;
+  font-size: 1.5em;
   font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .block{
@@ -218,7 +220,7 @@ transform: translateY(-50%);
   padding-right: 50px;
 }
 #textsmall {
-    line-height: 21px;
+    line-height: 25px;
     color: rgb(41, 41, 41);
     font-size: 15px;
     letter-spacing: 1px;
@@ -287,7 +289,6 @@ transform: translateY(-50%);
 }
 .red{
   background-color: red;
-
 }
 .blue{
   background-color: blue;
@@ -311,9 +312,9 @@ transform: translateY(-50%);
 
 .grid-item {
   width: 33vw;
-  height: auto;
-
-
+  height: 500px;
+  background-position: center;
+  float: left;
 
 
 }
@@ -322,4 +323,43 @@ transform: translateY(-50%);
   height: 50vh;
   width: $fullWidth;
   background-color: #e3e3e3;
+}
+
+@media only screen and (max-width: 1250px) {
+  #textsmall {
+    line-height: 20px;
+    font-size: 15px;
+  }
+
+  .smallText{
+    width: 400px;
+    display: inline-block;
+  }
+
+  .bigText{
+    width: 400px;
+    margin-left: 0;
+  }
+
+  .topText {
+    font-size: 1.3em;
+  }
+
+  .boldText {
+    width: 400px;
+    font-size: 1.3em;
+
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .grid-item{
+    width: 50vw;
+  }
+}
+
+
+@media only screen and (max-width: 800px) {
+  .grid-item{
+    width: 100vw;
+  }
 }

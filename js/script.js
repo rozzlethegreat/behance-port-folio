@@ -84,7 +84,7 @@ function getProjects() {
       url: "http://www.behance.net/v2/users/" + designerIDs[i] + "/projects?client_id=" + APIKey,
       dataType: "jsonp",
       success: function(DataFromJson) {
-				console.log(DataFromJson);
+
 				projectIDs.push(DataFromJson.projects[0].id);
 				if (projectIDs.length > 11) {
 					getProjectImg();
@@ -101,22 +101,44 @@ function getProjects() {
 
 }
 
+//
+// function getProjectImg(){
+// 	console.log(projectIDs.length);
+// for (var i = 0; i < projectIDs.length; i++) {
+// 	$.ajax({
+// 		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
+// 		dataType: "jsonp",
+// 		success: function(DataFromJson) {
+// 			console.log(DataFromJson.project.covers.original);
+// $('.grid').append("<img class='grid-item' src="+DataFromJson.project.covers.original+">")
+// 		},
+// 		error: function() {
+// 			console.log("Something Went Wrong");
+//
+// 		}
+//
+// 	})
+// }
+// }
+
 
 function getProjectImg(){
-	console.log(projectIDs.length);
-for (var i = 0; i < projectIDs.length; i++) {
-	$.ajax({
-		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
-		dataType: "jsonp",
-		success: function(DataFromJson) {
-			console.log(DataFromJson.project.covers.original);
-$('.grid').append("<img class='grid-item' src="+DataFromJson.project.covers.original+">")
-		},
-		error: function() {
-			console.log("Something Went Wrong");
+    console.log(projectIDs.length);
+    for (var i = 0; i < projectIDs.length; i++) {
+        var gridItems = [];
+        gridItems.push('grid-item'+i);
+        console.log(gridItems);
+        $.ajax({
+            url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
+            dataType: "jsonp",
+            success: function(DataFromJson) {
+                $('.grid').append("<div class='grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></div>");
+            },
+            error: function() {
+                console.log("Something Went Wrong");
 
-		}
+            }
 
-	})
-}
+        })
+    }
 }
