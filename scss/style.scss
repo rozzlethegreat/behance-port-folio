@@ -3,7 +3,7 @@ $fullWidth: 100vw;
 $fullHeight: 100vh;
 @font-face {
     font-family: YouMurdererBB;
-    src: url(fonts/YouMurdererBB.otf);
+    src: url(fonts/YouMurdererBB.woff);
 }
 body{
   margin: 0;
@@ -46,14 +46,6 @@ width: 200px;
 float: left;
 }
 
-
-// .logo{
-//   width: 100%;
-//   height: 90vh;
-//   background-image: url('../img/vers3.png');
-//   background-repeat: no-repeat;
-//   background-position: center;
-// }
 
 .info{
   width: 45%;
@@ -99,6 +91,7 @@ float: left;
 	top: 0px;
 	width:100%;
 	height: 120px;
+  z-index: 999;
 	background: transparent;
 	color: #FFF;
 	font-size: 23px;
@@ -225,10 +218,108 @@ transform: translateY(-50%);
   padding-right: 50px;
 }
 #textsmall {
-
     line-height: 21px;
     color: rgb(41, 41, 41);
     font-size: 15px;
     letter-spacing: 1px;
+}
 
+.qouteDiv{
+  width: $fullWidth;
+  height: auto;
+
+}
+
+.fullscreen-bg {
+  position:relative;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -100;
+}
+
+.fullscreen-bg__video {
+
+    width: 100%;
+    height: 100%;
+}
+.TeamDiv{
+  height: 50vh;
+  width: $fullWidth;
+}
+.overlay{
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+#VidText {
+    font-family: YouMurdererBB;
+    color: #ffffff;
+    letter-spacing: 2px;
+    font-weight: 300;
+    font-size: 71px;
+}
+
+#teamH1 {
+
+    text-transform: uppercase;
+    line-height: 2;
+    font-family: 'Raleway', sans-serif;
+    font-size: 4em;
+    letter-spacing: 1px;
+    font-weight: 100;
+    text-align: center;
+}
+.projectsHr {
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20vh;
+}
+.work{
+  background-color: black;
+  width: $fullWidth;
+  height: auto;
+}
+.red{
+  background-color: red;
+
+}
+.blue{
+  background-color: blue;
+}
+.grid {
+  background-color: black;
+  max-height: auto;
+  height: auto !important;
+
+
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-item {
+  width: 33vw;
+  height: auto;
+
+
+
+
+}
+
+.footer{
+  height: 50vh;
+  width: $fullWidth;
+  background-color: #e3e3e3;
 }
