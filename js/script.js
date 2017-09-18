@@ -28,7 +28,7 @@ function yScroll() {
     pagetop.style.paddingTop = "30px";
     logo.style.color = "#fff";
     logo.style.fontSize = "100px";
-    for (var i = 0; i < hamburger.length; i++) {
+    for (i = 0; i < hamburger.length; i++) {
       hamburger[i].style.backgroundColor = "#fff";
     }
   }
@@ -101,38 +101,16 @@ function getProjects() {
 
 }
 
-//
-// function getProjectImg(){
-// 	console.log(projectIDs.length);
-// for (var i = 0; i < projectIDs.length; i++) {
-// 	$.ajax({
-// 		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
-// 		dataType: "jsonp",
-// 		success: function(DataFromJson) {
-// 			console.log(DataFromJson.project.covers.original);
-// $('.grid').append("<img class='grid-item' src="+DataFromJson.project.covers.original+">")
-// 		},
-// 		error: function() {
-// 			console.log("Something Went Wrong");
-//
-// 		}
-//
-// 	})
-// }
-// }
-
-
 function getProjectImg(){
-    console.log(projectIDs.length);
     for (var i = 0; i < projectIDs.length; i++) {
         var gridItems = [];
         gridItems.push('grid-item'+i);
-        console.log(gridItems);
         $.ajax({
             url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
             dataType: "jsonp",
             success: function(DataFromJson) {
                 $('.grid').append("<div class='grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></div>");
+
             },
             error: function() {
                 console.log("Something Went Wrong");
@@ -142,3 +120,8 @@ function getProjectImg(){
         })
     }
 }
+
+$(document).on("click", ".img-tag", function() {
+    console.log("clicked")
+});
+

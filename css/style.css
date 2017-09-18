@@ -322,10 +322,47 @@ body {
   float: left;
 }
 
+.img-tag {
+  cursor: pointer;
+}
+
 .footer {
-  height: 50vh;
+  height: 25vh;
   width: 100vw;
   background-color: #e3e3e3;
+}
+
+#copyright {
+  font-size: 1.2em;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.block2 {
+  width: 250px;
+  height: 7px;
+  background-color: #DA1932;
+  display: inline-block;
+}
+
+#footer-text {
+  position: relative;
+  top: 70px;
+  margin-left: 20px;
+}
+
+.footer-head {
+  font-family: YouMurdererBB;
+  font-size: 60px;
+  font-weight: 100;
+  padding: 20px 0 0 20px;
+}
+
+.author {
+  font-size: 1em;
+  font-family: 'Oxygen', sans-serif;
+  position: relative;
+  top: 80px;
+  margin-left: 20px;
 }
 
 @media only screen and (max-width: 1250px) {
