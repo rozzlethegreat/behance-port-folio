@@ -2,10 +2,33 @@ var pagetop, menu, yPos, logo, APIKey, DesignersProfile;
 var designerIDs = new Array();
 var projectIDs = new Array();
 var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner");
+$('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
 window.addEventListener("scroll", yScroll);
+
+//Smooth Scrolling with in page anchors
+        $("a").on('click', function(event) {
+$('.MenuOpen').css("display", "none");
+  $('#nav-icon2').toggleClass('open');
+    $('*').css("overflow-y", "auto")
+           if (this.hash !== "") {
+
+             event.preventDefault();
+
+
+             var hash = this.hash;
+
+console.log(hash);
+             $('html, body').animate({
+               scrollTop: $(hash).offset().top
+             }, 800, function(){
+
+               window.location.hash = hash;
+             });
+           }
+         });
 
 function yScroll() {
   logo = document.getElementById('logo');
@@ -131,7 +154,7 @@ function getProjectImg(){
     }
 }
 
-$('.MenuOpen').css("display", "none");
+
 
 function hoverEffect(){
   var boxes = document.querySelectorAll('.grid-item');
@@ -151,7 +174,6 @@ for (var i = 0; i < boxes.length; i++) {
 
 }
 }
-
 $(document).on("click", ".img-tag", function() {
     console.log("clicked")
 });
