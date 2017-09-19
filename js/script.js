@@ -11,7 +11,6 @@ function yScroll() {
   logo = document.getElementById('logo');
   pagetop = document.getElementById('pagetop');
   menu = document.getElementById('menu');
-
   yPos = window.pageYOffset;
   if (yPos > 50) {
     pagetop.style.backgroundColor = "#fff";
@@ -28,7 +27,7 @@ function yScroll() {
     pagetop.style.paddingTop = "30px";
     logo.style.color = "#fff";
     logo.style.fontSize = "100px";
-    for (var i = 0; i < hamburger.length; i++) {
+    for (i = 0; i < hamburger.length; i++) {
       hamburger[i].style.backgroundColor = "#fff";
     }
   }
@@ -93,7 +92,7 @@ function getProjects() {
       url: "http://www.behance.net/v2/users/" + designerIDs[i] + "/projects?client_id=" + APIKey,
       dataType: "jsonp",
       success: function(DataFromJson) {
-				console.log(DataFromJson);
+
 				projectIDs.push(DataFromJson.projects[0].id);
 				if (projectIDs.length > 11) {
 					getProjectImg();
@@ -110,36 +109,49 @@ function getProjects() {
 
 }
 
-
 function getProjectImg(){
-	console.log(projectIDs.length);
-for (var i = 0; i < projectIDs.length; i++) {
-	$.ajax({
-		url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
-		dataType: "jsonp",
-		success: function(DataFromJson) {
-			console.log(DataFromJson.project.covers.original);
-$('.grid').append("<img class='grid-item' src="+DataFromJson.project.covers.original+">")
-		},
-		error: function() {
-			console.log("Something Went Wrong");
+    for (var i = 0; i < projectIDs.length; i++) {
+        var gridItems = [];
+        gridItems.push('grid-item'+i);
+        $.ajax({
+            url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
+            dataType: "jsonp",
+            success: function(DataFromJson) {
+                $('.grid').append("<div class='grid-item img-tag'><img class='img grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></img></div>");
+                if ($('.grid-item').length > 11) {
+                    hoverEffect();
+                  }
+            },
+            error: function() {
+                console.log("Something Went Wrong");
 
-		}
+            }
 
-	})
+        })
+    }
 }
-}
+
 $('.MenuOpen').css("display", "none");
 
-// $('.spanner').click(function(){
-//
-// //   if ($('.open').length) {
+function hoverEffect(){
+  var boxes = document.querySelectorAll('.grid-item');
 
-// //   }else if ($('.open').length) {
-// //     $('.MenuOpen').css("display", "none");
-// // }
-//
-//
-//
-//
-// });
+for (var i = 0; i < boxes.length; i++) {
+  boxes[i].style.height = boxes[i].offsetWidth + 'px';
+  boxes[i].addEventListener("mouseenter", function(e) {
+    TweenMax.to(e.target.querySelector('img'), 10, {
+      scale: "1.15"
+    });
+  });
+  boxes[i].addEventListener("mouseleave", function(e) {
+    TweenMax.to(e.target.querySelector('img'), 0.9, {
+      scale: "1"
+    });
+  });
+
+}
+}
+
+$(document).on("click", ".img-tag", function() {
+    console.log("clicked")
+});

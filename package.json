@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/rozzlethegreat/behance-port-folio#readme",
   "dependencies": {
-    "jquery": "^3.2.1"
+    "gsap": "^1.20.2",
+    "jquery": "^3.2.1",
+    "masonry-layout": "^4.2.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

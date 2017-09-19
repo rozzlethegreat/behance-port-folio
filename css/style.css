@@ -63,19 +63,21 @@ body {
 .bigText {
   width: 40%;
   display: inline-block;
-  margin-left: 25px;
+  margin-left: 40px;
   vertical-align: top;
 }
 
 .topText {
   height: 30px;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 
 .boldText {
-  height: 100px;
-  font-size: 1.3em;
+  width: 400px;
+  font-size: 1.5em;
   font-weight: 700;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .block {
@@ -223,7 +225,7 @@ body {
 }
 
 #textsmall {
-  line-height: 21px;
+  line-height: 25px;
   color: #292929;
   font-size: 15px;
   letter-spacing: 1px;
@@ -315,12 +317,20 @@ body {
 
 /* ---- grid-item ---- */
 .grid-item {
-  width: 33.3333333333vw;
-  height: 50vh;
+  width: 33.4vw !important;
+  height: 500px !important;
+  background-position: center;
+  float: left;
+  margin: -1px;
+  overflow-y: hidden;
+}
+
+.img-tag {
+  cursor: pointer;
 }
 
 .footer {
-  height: 50vh;
+  height: 25vh;
   width: 100vw;
   background-color: #e3e3e3;
 }
@@ -333,6 +343,75 @@ body {
   position: fixed;
   z-index: 2000;
   overflow: hidden;
+}
+
+#copyright {
+  font-size: 1.2em;
+  font-family: 'Oxygen', sans-serif;
+}
+
+.block2 {
+  width: 250px;
+  height: 7px;
+  background-color: #DA1932;
+  display: inline-block;
+}
+
+#footer-text {
+  position: relative;
+  top: 70px;
+  margin-left: 20px;
+}
+
+.footer-head {
+  font-family: YouMurdererBB;
+  font-size: 60px;
+  font-weight: 100;
+  padding: 20px 0 0 20px;
+}
+
+.author {
+  font-size: 1em;
+  font-family: 'Oxygen', sans-serif;
+  position: relative;
+  top: 80px;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 1250px) {
+  #textsmall {
+    line-height: 20px;
+    font-size: 15px;
+  }
+
+  .smallText {
+    width: 400px;
+    display: inline-block;
+  }
+
+  .bigText {
+    width: 400px;
+    margin-left: 0;
+  }
+
+  .topText {
+    font-size: 1.3em;
+  }
+
+  .boldText {
+    width: 400px;
+    font-size: 1.3em;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .grid-item {
+    width: 50vw !important;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .grid-item {
+    width: 100vw !important;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
