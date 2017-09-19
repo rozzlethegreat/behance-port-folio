@@ -322,11 +322,37 @@ body {
   background-position: center;
   float: left;
   margin: -1px;
-  overflow-y: hidden;
+  overflow-y: hidden !important;
 }
 
 .img-tag {
   cursor: pointer;
+}
+
+a {
+  color: #ff2222;
+}
+a:visited {
+  color: #ff2222;
+}
+
+.menuH1 {
+  z-index: 20000;
+  position: relative;
+  color: #ff2222;
+  margin: 0 auto;
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 500px;
+  font-family: 'YouMurdererBB';
+  font-weight: 400;
+  font-size: 115px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
 }
 
 .footer {
@@ -336,8 +362,7 @@ body {
 }
 
 .MenuOpen {
-  background-color: black;
-  opacity: 0.6;
+  background-color: rgba(0, 0, 0, 0.9);
   width: 100vw;
   height: 100%;
   position: fixed;
