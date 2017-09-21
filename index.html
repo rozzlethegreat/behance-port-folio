@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Ripped Design</title>
-    <link rel="stylesheet" type="text/css" href="css/style.min.css">
+    <link rel="stylesheet" href="node_modules/remodal/dist/remodal.css">
+    <link rel="stylesheet" href="node_modules/remodal/dist/remodal-default-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Raleway:100,200,300,400,900" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 </head>
@@ -69,6 +71,7 @@
         <h4 class="footer-head">Ripped</h4>
         <div id="footer-text">
             <p id="copyright">Copyright 2017</p>
+        <a data-remodal-target="modal">Call the modal with data-remodal-id="modal"</a>
             <div class="block2"></div>
         </div>
         <div class="author">
@@ -78,9 +81,27 @@
     </div>
 
 
+    <div class="remodal-bg">
+    ...Page content...
+    </div>
+
+
+    <div class="remodal" data-remodal-id="modal">
+  <button data-remodal-action="close"></button>
+  <h1>Remodal</h1>
+  <p>
+    Responsive, lightweight, fast, synchronized with CSS animations, fully customizable modal window plugin with declarative configuration and hash tracking.
+  </p>
+  <br>
+  <button data-remodal-action="cancel" class="remodal-cancel">Cancel</button>
+  <button data-remodal-action="confirm" class="remodal-confirm">OK</button>
+</div>
+
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
     <script src="node_modules/gsap/src/minified/TweenMax.min.js"></script>
-    <script type="text/javascript" src="js/script.min.js"></script>
+        <script type="text/javascript" src="js/script.min.js"></script>
+<script src="node_modules/remodal/dist/remodal.min.js"></script>
+
 </body>
 </html>

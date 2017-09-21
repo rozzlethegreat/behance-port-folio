@@ -19,7 +19,8 @@
   "dependencies": {
     "gsap": "^1.20.2",
     "jquery": "^3.2.1",
-    "masonry-layout": "^4.2.0"
+    "masonry-layout": "^4.2.0",
+    "remodal": "^1.1.1"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
