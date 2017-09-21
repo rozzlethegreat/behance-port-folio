@@ -97,6 +97,7 @@ function getProjects() {
 				if (projectIDs.length > 11) {
 					getProjectImg();
 				}
+          console.log(DataFromJson.projects[0].stats);
 
       },
       error: function() {
@@ -155,9 +156,9 @@ function hoverEffect() {
 $(document).on("mouseenter", ".img-tag", function() {
     $(this).css('background-color', '#000');
     $(this).css('opacity', '0.6');
+    $(this).css('transition', 'opacity 2s ease');
 });
 
 $(document).on("mouseout", ".img-tag", function() {
-    // $(this).css('background-color', 'none');
     $(this).css('opacity', '1');
 });
