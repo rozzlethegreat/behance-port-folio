@@ -40,7 +40,7 @@ $('#nav-icon2').click(function() {
         $('.MenuOpen').css("display", "block");
 
     }else {
-      $('*').css("overflow-y", "auto")
+      $('*').css("overflow-y", "auto");
         $('.MenuOpen').css("display", "none");
     }
 });
@@ -66,13 +66,14 @@ $.ajax({
   error: function() {
     console.log("Something Went Wrong");
   }
-})
+});
 
 function getRippedDesigners() {
   $.ajax({
     url: "http://www.behance.net/v2/users/" + DesignersProfile + "/following?client_id=" + APIKey,
     dataType: "jsonp",
     success: function(DataFromJson) {
+
       for (var i = 0; i < DataFromJson.following.length; i++) {
         designerIDs.push(DataFromJson.following[i].id);
       }
@@ -92,7 +93,6 @@ function getProjects() {
       url: "http://www.behance.net/v2/users/" + designerIDs[i] + "/projects?client_id=" + APIKey,
       dataType: "jsonp",
       success: function(DataFromJson) {
-
 				projectIDs.push(DataFromJson.projects[0].id);
 				if (projectIDs.length > 11) {
 					getProjectImg();
@@ -111,13 +111,12 @@ function getProjects() {
 
 function getProjectImg(){
     for (var i = 0; i < projectIDs.length; i++) {
-        var gridItems = [];
-        gridItems.push('grid-item'+i);
         $.ajax({
             url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
             dataType: "jsonp",
             success: function(DataFromJson) {
-                $('.grid').append("<div class='grid-item img-tag'><img class='img grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></img></div>");
+                $('.grid').append("<div class='grid-item img-tag' data-toggle='modal' data-target='#myModal'>" +
+                    "<img class='grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></div>");
                 if ($('.grid-item').length > 11) {
                     hoverEffect();
                   }
@@ -133,25 +132,32 @@ function getProjectImg(){
 
 $('.MenuOpen').css("display", "none");
 
-function hoverEffect(){
-  var boxes = document.querySelectorAll('.grid-item');
+function hoverEffect() {
+    var boxes = document.querySelectorAll('.grid-item');
 
-for (var i = 0; i < boxes.length; i++) {
-  boxes[i].style.height = boxes[i].offsetWidth + 'px';
-  boxes[i].addEventListener("mouseenter", function(e) {
-    TweenMax.to(e.target.querySelector('img'), 10, {
-      scale: "1.15"
-    });
-  });
-  boxes[i].addEventListener("mouseleave", function(e) {
-    TweenMax.to(e.target.querySelector('img'), 0.9, {
-      scale: "1"
-    });
-  });
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].style.height = boxes[i].offsetWidth + 'px';
+        boxes[i].addEventListener("mouseenter", function (e) {
+            TweenMax.to(e.target.querySelector('img'), 10, {
+                scale: "1.15"
+            });
+        });
+        boxes[i].addEventListener("mouseleave", function (e) {
+            TweenMax.to(e.target.querySelector('img'), 0.9, {
+                scale: "1"
+            });
+        });
 
+    }
 }
-}
 
-$(document).on("click", ".img-tag", function() {
-    console.log("clicked")
+
+$(document).on("mouseenter", ".img-tag", function() {
+    $(this).css('background-color', '#000');
+    $(this).css('opacity', '0.6');
+});
+
+$(document).on("mouseout", ".img-tag", function() {
+    // $(this).css('background-color', 'none');
+    $(this).css('opacity', '1');
 });
