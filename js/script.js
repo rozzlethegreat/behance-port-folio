@@ -1,34 +1,36 @@
 var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city;
 var designerIDs = new Array();
 var projectIDs = new Array();
+var projects = new Array();
 var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner");
 $('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
+
 window.addEventListener("scroll", yScroll);
 
 //Smooth Scrolling with in page anchors
-        $("a").on('click', function(event) {
-$('.MenuOpen').css("display", "none");
+$("a").on('click', function(event) {
+  $('.MenuOpen').css("display", "none");
   $('#nav-icon2').toggleClass('open');
 
-           if (this.hash !== "") {
+  if (this.hash !== "") {
 
-             event.preventDefault();
+    event.preventDefault();
 
 
-             var hash = this.hash;
+    var hash = this.hash;
 
-console.log(hash);
-             $('html, body').animate({
-               scrollTop: $(hash).offset().top
-             }, 800, function(){
+    console.log(hash);
+    $('html, body').animate({
+      scrollTop: $(hash).offset().top
+    }, 800, function() {
 
-               window.location.hash = hash;
-             });
-           }
-         });
+      window.location.hash = hash;
+    });
+  }
+});
 
 function yScroll() {
   logo = document.getElementById('logo');
@@ -57,15 +59,15 @@ function yScroll() {
 }
 $('#nav-icon2').click(function() {
   $('#nav-icon2').toggleClass('open');
-    console.log($('.open').length);
-    if ($('.open').length === 1) {
+  console.log($('.open').length);
+  if ($('.open').length === 1) {
 
-        $('.MenuOpen').css("display", "block");
+    $('.MenuOpen').css("display", "block");
 
-    }else {
+  } else {
 
-        $('.MenuOpen').css("display", "none");
-    }
+    $('.MenuOpen').css("display", "none");
+  }
 });
 $('.grid').masonry({
   itemSelector: '.grid-item',
@@ -91,16 +93,17 @@ $.ajax({
     console.log("Something Went Wrong");
   }
 })
+var id, first_name, last_name, city, dp, projectscover
 
 function getRippedDesigners() {
   $.ajax({
     url: "http://www.behance.net/v2/users/" + DesignersProfile + "/following?client_id=" + APIKey,
     dataType: "jsonp",
     success: function(DataFromJson) {
-
       for (var i = 0; i < DataFromJson.following.length; i++) {
         designerIDs.push(DataFromJson.following[i]);
-      }
+      };
+      console.log(designerIDs);
 
       getProjects();
     },
@@ -112,18 +115,22 @@ function getRippedDesigners() {
 
 function getProjects() {
 
-		for (var i = 0; i < designerIDs.length; i++) {
+  for (var i = 0; i < designerIDs.length; i++) {
     $.ajax({
 
       url: "http://www.behance.net/v2/users/" + designerIDs[i].id + "/projects?client_id=" + APIKey,
       dataType: "jsonp",
       success: function(DataFromJson) {
 
-
-				projectIDs.push(DataFromJson.projects[0].id);
-				if (projectIDs.length > 11) {
-					getProjectImg();
-				}
+        // console.log(DataFromJson);
+        projectIDs.push(DataFromJson.projects[0].id);
+        // console.log(DataFromJson);
+        for (var i = 0; i < 9; i++) {
+          projects.push([DataFromJson.projects[i].id, DataFromJson.projects[i].name, DataFromJson.projects[i].covers.original]);
+        }
+        if (projectIDs.length > 11) {
+          getProjectImg();
+        }
 
       },
       error: function() {
@@ -136,70 +143,95 @@ function getProjects() {
 
 }
 
-function getProjectImg(){
-    for (var i = 0; i < projectIDs.length; i++) {
-        var gridItems = [];
-        gridItems.push('grid-item'+i);
-        first_name = designerIDs[i].first_name;
-      last_name = designerIDs[i].last_name;
-          city = designerIDs[i].city;
-          console.log(first_name, last_name, city);
-        $.ajax({
-            url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
-            dataType: "jsonp",
-            success: function(DataFromJson) {
-                $('.grid').append("<div class='grid-item img-tag'><a id='aLink' data-remodal-target='modal'><img class='img grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></img><h1 class='Dets'>"+DataFromJson.project.owners[0].display_name+"</h1></a></div>");
-                if ($('.grid-item').length >= 12) {
+function getProjectImg() {
+  for (var i = 0; i < projectIDs.length; i++) {
+    var gridItems = [];
+    gridItems.push('grid-item' + i);
+    console.log(projectIDs.length);
 
-                    hoverEffect();
-                  }
 
-            },
-            error: function() {
-                console.log("Something Went Wrong");
+    //
 
-            }
 
-        })
-    }
+    $.ajax({
+      url: "http://www.behance.net/v2/projects/" + projectIDs[i] + "?client_id=" + APIKey,
+      dataType: "jsonp",
+      success: function(DataFromJson) {
+
+        $('.grid').append("<div class='grid-item img-tag'><a id='aLink' data-remodal-target='modal'><img class='img grid-item img-tag' style='background-image: url(" + DataFromJson.project.covers.original + ")'></img><h1 class='Dets'>" + DataFromJson.project.owners[0].first_name + "</h1></a></div>");
+        console.log($('.grid-item').length);
+        if ($('.grid-item').length >= 24) {
+
+          hoverEffect();
+          getStuff();
+
+        } else {
+          return;
+        }
+
+      },
+      error: function() {
+        console.log("Something Went Wrong");
+
+      }
+
+    })
+  }
 }
 
 
-function hoverEffect(){
+function hoverEffect() {
   var boxes = document.querySelectorAll('.grid-item');
 
-for (var i = 0; i < boxes.length; i++) {
-  boxes[i].style.height = boxes[i].offsetWidth + 'px';
-  boxes[i].addEventListener("mouseenter", function(e) {
-    TweenMax.to(e.target.querySelector('img'), 10, {
-      scale: "1.15"
+  for (var i = 0; i < boxes.length; i++) {
+    boxes[i].style.height = boxes[i].offsetWidth + 'px';
+    boxes[i].addEventListener("mouseenter", function(e) {
+      TweenMax.to(e.target.querySelector('img'), 10, {
+        scale: "1.15"
+      });
     });
-  });
-  boxes[i].addEventListener("mouseleave", function(e) {
-    TweenMax.to(e.target.querySelector('img'), 0.9, {
-      scale: "1"
+    boxes[i].addEventListener("mouseleave", function(e) {
+      TweenMax.to(e.target.querySelector('img'), 0.9, {
+        scale: "1"
+      });
     });
+  }
+}
+if ($('.grid-item').length > 12) {
+  getStuff();
+}
+
+function getStuff() {
+  $('.grid-item').on("click", function() {
+    for (var i = 0; i < 12; i++) {
+      var owner = $(this).find('.Dets').html();
+      if (owner == designerIDs[i].first_name) {
+        dp = designerIDs[i].images[230];
+        first_name = designerIDs[i].first_name;
+        last_name = designerIDs[i].last_name;
+        city = designerIDs[i].city;
+
+        followers = designerIDs[i].stats.followers;
+        appris = designerIDs[i].stats.appreciations;
+        views = designerIDs[i].stats.views;
+        console.log(designerIDs);
+        $('.circlePic').css("background-image", "url(" + dp + ")");
+        $('#User').empty();
+        $('#User').append(first_name + " " + last_name);
+        $('#city').empty();
+        $('#city').append(city);
+        $('#views').empty();
+        $('#views').append(views);
+        $('#appris').empty();
+        $('#appris').append(appris);
+        $('#followers').empty();
+        $('#followers').append(followers);
+      }
+
+    };
+
   });
+
+
+
 }
-}
-// var thisvar;
-// $(document).on("mouseenter", ".img-tag, .Dets", function() {
-//     $(this).css('background-color', '#000');
-//     $(this).css('opacity', '0.8');
-//     $(this).css('transition', 'opacity 1s ease');
-//     $(this).find('.Dets').css('display', "table-cell");
-//     $(this).find('.Dets').css('opacity', "1");
-//     thisvar = $(this);
-//     console.log(thisvar);
-// });
-//
-// $(document).on("mouseout", ".img-tag, Dets", function() {
-//     $(this).css('opacity', '1');
-//         $(this).find('.Dets').css('display', "none");
-// });
-// $(document).on("mouseenter", ".Dets", function() {
-//   thisvar.css('background-color', '#000');
-//   thisvar.css('opacity', '0.8');
-//   thisvar.css('transition', 'opacity 1s ease');
-//     $(this).css('display', "table-cell");
-// });
