@@ -1,7 +1,9 @@
-var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city;
+var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity;
 var designerIDs = new Array();
 var projectIDs = new Array();
+var projectIdss;
 var projects = new Array();
+var projectIden =  new Array();
 var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner");
 $('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
@@ -120,7 +122,6 @@ function getProjects() {
       dataType: "jsonp",
       success: function(DataFromJson) {
 
-
         projectIDs.push(DataFromJson.projects[0].id);
 
         // for (var i = 0; i < 9; i++) {
@@ -129,7 +130,7 @@ function getProjects() {
         if (projectIDs.length > 11) {
           getProjectImg();
         };
-        console.log(projects);
+
 
       },
       error: function() {
@@ -195,21 +196,19 @@ function hoverEffect() {
 if ($('.grid-item').length > 12) {
   getStuff();
 }
-var projectBoxes = $('.project');
 function getStuff() {
   $('.grid-item').on("click", function() {
     for (var i = 0; i < 12; i++) {
       var owner = $(this).find('.Dets').html();
       if (owner == designerIDs[i].first_name) {
         dp = designerIDs[i].images[230];
+        identity = (designerIDs[i].id);
         first_name = designerIDs[i].first_name;
         last_name = designerIDs[i].last_name;
         city = designerIDs[i].city;
-
         followers = designerIDs[i].stats.followers;
         appris = designerIDs[i].stats.appreciations;
         views = designerIDs[i].stats.views;
-        console.log(designerIDs);
         $('.circlePic').css("background-image", "url(" + dp + ")");
         $('#User').empty();
         $('#User').append(first_name + " " + last_name);
@@ -221,24 +220,60 @@ function getStuff() {
         $('#appris').append(appris);
         $('#followers').empty();
         $('#followers').append(followers);
-        console.log(owner);
-        console.log(projects[i].projects[0].owners[0].first_name);
-        console.log(projects[i].);
-        for (var i = 0; i < projectBoxes.length; i++) {
+        projectIden = [];
+    $('.box').empty();
+        for (var i = 0; i < 12; i++) {
           if (owner == projects[i].projects[0].owners[0].first_name) {
-            // projectBoxes[i].css("background-image", "url("+projects[i].projects[i]+")" )
+            for (var j = 0; j < 8; j++) {
+              $('.box').append("<div class='project' style='background-image: url(" + projects[i].projects[j].covers[404] + ")'></div>");
+              projectIdss = projects[i].projects[j].id;
+
+              projectIden.push(projects[i].projects[j]);
+console.log(
+  projectIden
+);
+              console.log(projectIden);
+            }
             }
           }
-
+            getimg();
       }
-      // if (owner > projects.) {
-      //
-      // }
-
     };
-
   });
+}
+function getimg(){
+  $('.project').on("click", function(){
+      var bg = $(this).css('background-image');
+      bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
+      for (var i = 0; i < projectIden.length; i++) {
+        if (bg == projectIden[i].covers[404]) {
+          console.log(projectIden[i].id);
+          var projectCode = projectIden[i].id;
+          $.ajax({
+            url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
+            dataType: "jsonp",
+            success: function(DataFromJson) {
+              console.log(DataFromJson);
+              $('.box').empty();
+              for (var i = 0; i < projectIden.length; i++) {
+                var names = [];
+                names.push(DataFromJson.project.modules[i]);
+                var found_names = $.grep(names, function(v) {
+                  return v.type === "image";
+                });
+                console.log(found_names);
+                $('.box').append("<img class='projectImages' style='background-image: url(" + found_names[i].sizes.max_1200+ ")'></img>")
+              }
 
+            },
+            error: function() {
+              console.log("Something Went Wrong");
 
+            }
 
+          })
+        }
+      }
+
+  })
 }

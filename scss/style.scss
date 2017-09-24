@@ -473,9 +473,7 @@ font-weight: 100;
     /* position: absolute; */
     right: 0;
     left: 0;
-    /* position: relative; */
     top: 50%;
-    /* transform: translateY(-50%); */
     display: table-cell;
     opacity: 0;
     pointer-events: none;
@@ -489,8 +487,8 @@ position: relative;
 
 .remodal{
   padding: 0px;
-  max-width: 80vw;
-  width: 80vw;
+  max-width: 70vw;
+  width: 70vw;
   height: 80vh;
 }
 .sidebar {
@@ -529,9 +527,16 @@ h4#city {
     position: relative;
 }
 .project {
-    width: 230px;
-    height: 300px;
+  width: 403px;
+      height: 300px;
     float: left;
     background-color: red;
-    margin: 10px;
+      margin: 3px;
+}
+.projectImages{
+  width: 100%;
+height: 0;
+padding-top: 66.65%;
+background-size: contain;
+background-repeat: no-repeat;
 }
