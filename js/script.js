@@ -7,7 +7,6 @@ $('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
-
 window.addEventListener("scroll", yScroll);
 
 //Smooth Scrolling with in page anchors
@@ -103,7 +102,6 @@ function getRippedDesigners() {
       for (var i = 0; i < DataFromJson.following.length; i++) {
         designerIDs.push(DataFromJson.following[i]);
       };
-      console.log(designerIDs);
 
       getProjects();
     },
@@ -122,15 +120,16 @@ function getProjects() {
       dataType: "jsonp",
       success: function(DataFromJson) {
 
-        // console.log(DataFromJson);
+
         projectIDs.push(DataFromJson.projects[0].id);
-        // console.log(DataFromJson);
-        for (var i = 0; i < 9; i++) {
-          projects.push([DataFromJson.projects[i].id, DataFromJson.projects[i].name, DataFromJson.projects[i].covers.original]);
-        }
+
+        // for (var i = 0; i < 9; i++) {
+          projects.push(DataFromJson);
+        // .projects[i].owners[0].first_name[DataFromJson.projects[i].id, DataFromJson.projects[i].name, DataFromJson.projects[i].covers.original, ]
         if (projectIDs.length > 11) {
           getProjectImg();
-        }
+        };
+        console.log(projects);
 
       },
       error: function() {
@@ -147,10 +146,6 @@ function getProjectImg() {
   for (var i = 0; i < projectIDs.length; i++) {
     var gridItems = [];
     gridItems.push('grid-item' + i);
-    console.log(projectIDs.length);
-
-
-    //
 
 
     $.ajax({
@@ -159,7 +154,7 @@ function getProjectImg() {
       success: function(DataFromJson) {
 
         $('.grid').append("<div class='grid-item img-tag'><a id='aLink' data-remodal-target='modal'><img class='img grid-item img-tag' style='background-image: url(" + DataFromJson.project.covers.original + ")'></img><h1 class='Dets'>" + DataFromJson.project.owners[0].first_name + "</h1></a></div>");
-        console.log($('.grid-item').length);
+
         if ($('.grid-item').length >= 24) {
 
           hoverEffect();
@@ -200,7 +195,7 @@ function hoverEffect() {
 if ($('.grid-item').length > 12) {
   getStuff();
 }
-
+var projectBoxes = $('.project');
 function getStuff() {
   $('.grid-item').on("click", function() {
     for (var i = 0; i < 12; i++) {
@@ -226,7 +221,19 @@ function getStuff() {
         $('#appris').append(appris);
         $('#followers').empty();
         $('#followers').append(followers);
+        console.log(owner);
+        console.log(projects[i].projects[0].owners[0].first_name);
+        console.log(projects[i].);
+        for (var i = 0; i < projectBoxes.length; i++) {
+          if (owner == projects[i].projects[0].owners[0].first_name) {
+            // projectBoxes[i].css("background-image", "url("+projects[i].projects[i]+")" )
+            }
+          }
+
       }
+      // if (owner > projects.) {
+      //
+      // }
 
     };
 
