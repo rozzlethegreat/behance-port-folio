@@ -1,3 +1,7 @@
+
+
+
+var artistName = [], workName = [], views = [], appreciations = [], comments = [];
 var pagetop, menu, yPos, logo, APIKey, DesignersProfile;
 var designerIDs = new Array();
 var projectIDs = new Array();
@@ -5,6 +9,9 @@ var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner"
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
+
+
+
 window.addEventListener("scroll", yScroll);
 
 function yScroll() {
@@ -34,7 +41,7 @@ function yScroll() {
 }
 $('#nav-icon2').click(function() {
   $('#nav-icon2').toggleClass('open');
-    console.log($('.open').length);
+    // console.log($('.open').length);
     if ($('.open').length === 1) {
       $('*').css("overflow-y", "hidden");
         $('.MenuOpen').css("display", "block");
@@ -97,8 +104,19 @@ function getProjects() {
 				if (projectIDs.length > 11) {
 					getProjectImg();
 				}
-          console.log(DataFromJson.projects[0].stats);
-
+          var sArtistName = DataFromJson.projects[0].owners[0].display_name;
+          var sViews = DataFromJson.projects[0].stats.views;
+          var sAppreciations = DataFromJson.projects[0].stats.appreciations;
+          var sComments = DataFromJson.projects[0].stats.comments;
+          var sName = DataFromJson.projects[0].name;
+          console.log(artistName[1]);
+          artistName.push(sArtistName);
+          views.push(sViews);
+          appreciations.push(sAppreciations);
+          comments.push(sComments);
+          workName.push(sName);
+          google.charts.load('current', {'packages':['table']});
+          google.charts.setOnLoadCallback(drawTable);
       },
       error: function() {
         console.log("Something Went Wrong");
@@ -162,3 +180,19 @@ $(document).on("mouseenter", ".img-tag", function() {
 $(document).on("mouseout", ".img-tag", function() {
     $(this).css('opacity', '1');
 });
+
+function drawTable() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Artist');
+    data.addColumn('string', 'Work');
+    data.addColumn('number', 'Views');
+    data.addColumn('number', 'Appreciations');
+    data.addColumn('number', 'Comments');
+    for (var i = 0; i < projectIDs.length; i++) {
+        data.addRow([artistName[i], workName[i], views[i], appreciations[i], comments[i]]);
+    }
+
+    var table = new google.visualization.Table(document.getElementById('table-div'));
+
+    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+}
