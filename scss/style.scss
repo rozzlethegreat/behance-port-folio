@@ -54,33 +54,28 @@ float: left;
 
 //chart styling
 
-
-.bold-font {
-  font-weight: bold;
-}
-
-.right-text {
-  text-align: right;
-}
-
 .font-family{
   font-family: 'Oxygen', sans-serif;
 }
 
-.large-font {
-  font-family: 'Oxygen', sans-serif;
+.title-style {
+  font-weight: bold;
   font-size: 15px;
-}
-
-.background-color{
-  background-color: #da1932;
-}
-
-.italic-darkblue-font {
   color: #0000ff;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 3px;
+}
+
+.red-color{
+  background-color: rgba(218, 25, 50, 0.08);
+}
+
+.selected {
+  font-weight: bold;
 }
 
 //end of chart styling
+
 
 
 .info{
@@ -109,7 +104,6 @@ float: left;
 }
 
 .boldText {
-  width: 400px;
   font-size: 1.5em;
   font-weight: 700;
   margin-top: 20px;
@@ -410,6 +404,7 @@ transform: translateY(-50%);
   #textsmall {
     line-height: 20px;
     font-size: 15px;
+    width: 70%;
   }
 
   .smallText{
@@ -429,6 +424,7 @@ transform: translateY(-50%);
   .boldText {
     width: 400px;
     font-size: 1.3em;
+    width: 70%;
 
   }
 }

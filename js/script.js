@@ -182,14 +182,12 @@ $(document).on("mouseout", ".img-tag", function() {
 
 function drawTable() {
     var cssClassNames = {
-        'headerRow': 'italic-darkblue-font table-color large-font bold-font',
+        'headerRow': 'font-family title-style',
         'tableRow': 'font-family',
-        'oddTableRow': '',
-        'selectedTableRow': 'background-color large-font',
-        'hoverTableRow': '',
-        'headerCell': 'gold-border',
-        'tableCell': '',
-        'rowNumberCell': 'underline-blue-font'};
+        'oddTableRow': 'font-family',
+        'selectedTableRow': 'selected',
+        'hoverTableRow': 'red-color'
+        };
 
     var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
     var data = new google.visualization.DataTable();
