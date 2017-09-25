@@ -236,7 +236,7 @@ function getStuff() {
         $('#followers').append(followers);
         projectIden = [];
     $('.box').empty();
-        for (var i = 0; i < 12; i++) {
+        for (i = 0; i < 12; i++) {
           if (owner == projects[i].projects[0].owners[0].first_name) {
             for (var j = 0; j < 8; j++) {
               $('.box').append("<div class='project' style='background-image: url(" + projects[i].projects[j].covers[404] + ")'></div>");
@@ -292,6 +292,7 @@ function getimg(){
   })
 }
 
+
 function drawTable() {
     var cssClassNames = {
         'headerRow': 'font-family title-style',
@@ -300,7 +301,6 @@ function drawTable() {
         'selectedTableRow': 'selected',
         'hoverTableRow': 'red-color'
         };
-
 
     var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
     var data = new google.visualization.DataTable();
@@ -317,3 +317,23 @@ function drawTable() {
 
     table.draw(data, options);
 }
+
+function showTable() {
+    console.log('hello');
+    $("#table-div").css("display", "block");
+    $("#hide").css("display", "inline-block");
+    $("#show").css("display", "none");
+
+}
+
+$("#hide").click(function(){
+    $("#show").css("display", "inline-block");
+    $("#table-div").css("display", "none");
+    $("#hide").css("display", "none");
+});
+$("#show").click(function(){
+    $("#hide").css("display", "inline-block");
+    $("#table-div").css("display", "block");
+    $("#show").css("display", "none");
+});
+

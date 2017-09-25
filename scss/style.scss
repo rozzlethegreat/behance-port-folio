@@ -348,8 +348,7 @@ a{
 position: relative;
 color: #ff2222;
 margin: 0 auto;
-position: relative;
-top: 40%;
+top: 30%;
 transform: translateY(-50%);
 width: 500px;
 font-family: 'YouMurdererBB';
@@ -436,6 +435,7 @@ background-color: rgba(0, 0, 0, 0.9);
 
   }
 }
+
 @media only screen and (max-width: 1200px) {
   .grid-item{
     width: 50vw !important;
@@ -513,20 +513,63 @@ button{
 
 h1#User {
     margin-top: 5%;
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
     color: BLACK;
 }
 
 h4#city {
-    font-family: 'Raleway';
+    font-family: 'Raleway', sans-serif;
     margin-top: 4%;
 }
+
+.v-f-a{
+  font-family: 'Raleway', sans-serif;
+  margin-top: 10px;
+}
+
+.svg{
+  display: inline-block;
+  margin-right: 10px;
+}
+
 .box {
     height: 100%;
     width: 75%;
     float: left;
     overflow-y: scroll;
     position: relative;
+}
+
+#show-hide{
+  text-align: center;
+  margin-top: 60px;
+  margin-right: 80px;
+}
+
+#hide{
+  display: none;
+}
+
+.btn-table{
+  padding: 18px;
+  font-family: 'Oxygen', sans-serif;
+  border: none;
+  background-color: #e3e3e3;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.btn-table:hover {
+  //box-shadow: inset 0 0 0 3px #0000ff;
+  background-color: rgba(0, 0, 255, 0.19);
+}
+
+#table-div{
+  text-align: center;
+  margin-top: 90px;
+  display: none;
 }
 .project {
   width: 403px;

@@ -15,6 +15,7 @@
     <h1 class="menuH1"><a href="#HomescreenMenu">Home</a></h1>
     <h1 class="menuH1"><a href="#aboutIdMenu">About</a></h1>
     <h1 class="menuH1"><a href="#TeamDivMenu">Our Work</a></h1>
+    <h1 class="menuH1"><a href="#VidText" onclick="showTable()">Statistics</a></h1>
   </div>
 
     <div id="pagetop">
@@ -33,6 +34,7 @@
     </div>
 
     <div class="Homescreen" id="HomescreenMenu"></div>
+
     <div class="randomDiv" id="aboutIdMenu">
         <div class="aligned info">
             <div class="smallText">
@@ -58,9 +60,16 @@
             </div>
         </div>
     </div>
+
+  <div id="show-hide">
+      <button class="btn-table" id="hide">Hide Stats</button>
+      <button class="btn-table" id="show">Show Stats</button>
+  </div>
+
+  <div id="table-div"></div>
+
     <div class="TeamDiv" id="TeamDivMenu">
         <h1 id="teamH1" class="aligned">Our Work</h1>
-        <div id="table-div"></div>
         <hr class="projectsHr">
     </div>
 
@@ -98,11 +107,20 @@
     </div>
     <h1 id="User"></h1>
     <h4 id="city"></h4>
-    <h5 id="views"></h5>
-    <h5 id="appris"></h5>
-    <h5 id="followers"></h5>
-  </div>
+      <div>
+          <img src="img/eye.svg" width="15px" class="svg">
+          <h5 class="v-f-a svg" id="views"></h5>
+      </div>
+      <div>
+          <img src="img/heart.svg" width="15px" class="svg">
+          <h5 class="v-f-a svg" id="appris"></h5>
+      </div>
+      <div>
+          <img src="img/followers2.svg" width="15px" class="svg">
+          <h5 class="v-f-a svg" id="followers"></h5>
+      </div>
 
+  </div>
 
 </div>
 
