@@ -170,7 +170,6 @@ function hoverEffect() {
     }
 }
 
-
 $(document).on("mouseenter", ".img-tag", function() {
     $(this).css('background-color', '#000');
     $(this).css('opacity', '0.6');
@@ -182,6 +181,17 @@ $(document).on("mouseout", ".img-tag", function() {
 });
 
 function drawTable() {
+    var cssClassNames = {
+        'headerRow': 'italic-darkblue-font table-color large-font bold-font',
+        'tableRow': 'font-family',
+        'oddTableRow': '',
+        'selectedTableRow': 'background-color large-font',
+        'hoverTableRow': '',
+        'headerCell': 'gold-border',
+        'tableCell': '',
+        'rowNumberCell': 'underline-blue-font'};
+
+    var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Artist');
     data.addColumn('string', 'Work');
@@ -194,5 +204,5 @@ function drawTable() {
 
     var table = new google.visualization.Table(document.getElementById('table-div'));
 
-    table.draw(data, {showRowNumber: true, width: '100%', height: '100%'});
+    table.draw(data, options);
 }
