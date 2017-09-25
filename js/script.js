@@ -189,6 +189,7 @@ function drawTable() {
         'hoverTableRow': 'red-color'
         };
 
+
     var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Artist');
