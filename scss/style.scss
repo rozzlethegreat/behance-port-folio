@@ -443,6 +443,10 @@ background-color: rgba(0, 0, 0, 0.9);
   .dets{
       margin-left: 50vw;
   }
+  .project{
+    min-width: 350px;
+    margin: 30px;
+  }
 }
 @media only screen and (max-width: 800px) {
   .grid-item{
@@ -529,18 +533,20 @@ h4#city {
     position: relative;
 }
 .project {
-  width: 403px;
-      height: 300px;
+    width: 25VW;
+    height: 40VH;
     float: left;
-    background-color: red;
-      margin: 3px;
+    /* background-color: red; */
+    margin: 3px;
+    background-repeat: none;
+    /* min-width: 405px; */
+    /* margin: 0 auto; */
 }
 .projectImages{
-  width: 100%;
-height: 0;
-padding-top: 66.65%;
-background-size: contain;
-background-repeat: no-repeat;
+width: 100%;
+height: 467px;
+background: no-repeat center;
+background-size: cover;
 }
 .font-family{
   font-family: 'Oxygen', sans-serif;

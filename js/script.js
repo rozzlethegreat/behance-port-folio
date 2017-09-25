@@ -1,10 +1,14 @@
 var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity;
-var artistName = [], workName = [], views = [], appreciations = [], comments = [];
+var artistName = [],
+  workName = [],
+  views = [],
+  appreciations = [],
+  comments = [];
 var designerIDs = new Array();
 var projectIDs = new Array();
 var projectIdss;
 var projects = new Array();
-var projectIden =  new Array();
+var projectIden = new Array();
 var hamburger = document.getElementById("nav-icon2").querySelectorAll(".spanner");
 $('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
@@ -126,25 +130,26 @@ function getProjects() {
         projectIDs.push(DataFromJson.projects[0].id);
 
         // for (var i = 0; i < 9; i++) {
-          projects.push(DataFromJson);
+        projects.push(DataFromJson);
         // .projects[i].owners[0].first_name[DataFromJson.projects[i].id, DataFromJson.projects[i].name, DataFromJson.projects[i].covers.original, ]
         if (projectIDs.length > 11) {
           getProjectImg();
         };
 
         var sArtistName = DataFromJson.projects[0].owners[0].display_name;
-var sViews = DataFromJson.projects[0].stats.views;
-var sAppreciations = DataFromJson.projects[0].stats.appreciations;
-var sComments = DataFromJson.projects[0].stats.comments;
-var sName = DataFromJson.projects[0].name;
-console.log(artistName[1]);
-artistName.push(sArtistName);
-views.push(sViews);
-appreciations.push(sAppreciations);
-comments.push(sComments);
-workName.push(sName);
-google.charts.load('current', {'packages':['table']});
-google.charts.setOnLoadCallback(drawTable);
+        var sViews = DataFromJson.projects[0].stats.views;
+        var sAppreciations = DataFromJson.projects[0].stats.appreciations;
+        var sComments = DataFromJson.projects[0].stats.comments;
+        var sName = DataFromJson.projects[0].name;
+        artistName.push(sArtistName);
+        views.push(sViews);
+        appreciations.push(sAppreciations);
+        comments.push(sComments);
+        workName.push(sName);
+        google.charts.load('current', {
+          'packages': ['table']
+        });
+        google.charts.setOnLoadCallback(drawTable);
 
       },
       error: function() {
@@ -210,6 +215,7 @@ function hoverEffect() {
 if ($('.grid-item').length > 12) {
   getStuff();
 }
+
 function getStuff() {
   $('.grid-item').on("click", function() {
     for (var i = 0; i < 12; i++) {
@@ -235,7 +241,7 @@ function getStuff() {
         $('#followers').empty();
         $('#followers').append(followers);
         projectIden = [];
-    $('.box').empty();
+        $('.box').empty();
         for (var i = 0; i < 12; i++) {
           if (owner == projects[i].projects[0].owners[0].first_name) {
             for (var j = 0; j < 8; j++) {
@@ -243,77 +249,82 @@ function getStuff() {
               projectIdss = projects[i].projects[j].id;
 
               projectIden.push(projects[i].projects[j]);
-console.log(
-  projectIden
-);
-              console.log(projectIden);
-            }
+
             }
           }
-            getimg();
+        }
+        getimg();
       }
     };
   });
 }
-function getimg(){
-  $('.project').on("click", function(){
-      var bg = $(this).css('background-image');
-      bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
-      for (var i = 0; i < projectIden.length; i++) {
-        if (bg == projectIden[i].covers[404]) {
-          console.log(projectIden[i].id);
-          var projectCode = projectIden[i].id;
-          $.ajax({
-            url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
-            dataType: "jsonp",
-            success: function(DataFromJson) {
-              console.log(DataFromJson);
-              $('.box').empty();
-              for (var i = 0; i < projectIden.length; i++) {
-                var names = [];
-                names.push(DataFromJson.project.modules[i]);
-                var found_names = $.grep(names, function(v) {
-                  return v.type === "image";
-                });
-                console.log(found_names);
-                $('.box').append("<img class='projectImages' style='background-image: url(" + found_names[i].sizes.max_1200+ ")'></img>")
-              }
 
-            },
-            error: function() {
-              console.log("Something Went Wrong");
+function getimg() {
+  $('.project').on("click", function() {
+    var bg = $(this).css('background-image');
+    bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
+    for (var i = 0; i < projectIden.length; i++) {
+      if (bg == projectIden[i].covers[404]) {
+
+        var projectCode = projectIden[i].id;
+        $.ajax({
+          url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
+          dataType: "jsonp",
+          success: function(DataFromJson) {
+            $('.project').css('margin', '0px')
+            console.log(DataFromJson);
+            $('.box').empty();
+            for (var i = 0; i < projectIden.length; i++) {
+              $('.box').css("background-color", "#" + DataFromJson.project.styles.background.color);
+              $('.projectItem').css("margin-bottom", DataFromJson.project.styles.spacing.modules.bottom_margin + "px");
+
+              if (DataFromJson.project.modules[i].type == "text") {
+                $('.box').append("<h1 class='projectText projectItem'>" + DataFromJson.project.modules[i].text + "</h1>")
+              } else if (DataFromJson.project.modules[i].type == "image") {
+                $('.box').append("<img class='projectImages projectItem' style='background-image: url(" + DataFromJson.project.modules[i].sizes.max_1200 + ")' height='" + DataFromJson.project.modules[i].height+ "px'></img>")
+              }
 
             }
 
-          })
-        }
+          },
+          error: function() {
+            console.log("Something Went Wrong");
+
+          }
+
+        })
       }
+    }
 
   })
 }
 
 function drawTable() {
-    var cssClassNames = {
-        'headerRow': 'font-family title-style',
-        'tableRow': 'font-family',
-        'oddTableRow': 'font-family',
-        'selectedTableRow': 'selected',
-        'hoverTableRow': 'red-color'
-        };
+  var cssClassNames = {
+    'headerRow': 'font-family title-style',
+    'tableRow': 'font-family',
+    'oddTableRow': 'font-family',
+    'selectedTableRow': 'selected',
+    'hoverTableRow': 'red-color'
+  };
 
 
-    var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'Artist');
-    data.addColumn('string', 'Work');
-    data.addColumn('number', 'Views');
-    data.addColumn('number', 'Appreciations');
-    data.addColumn('number', 'Comments');
-    for (var i = 0; i < projectIDs.length; i++) {
-        data.addRow([artistName[i], workName[i], views[i], appreciations[i], comments[i]]);
-    }
+  var options = {
+    'showRowNumber': true,
+    'allowHtml': true,
+    'cssClassNames': cssClassNames
+  };
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Artist');
+  data.addColumn('string', 'Work');
+  data.addColumn('number', 'Views');
+  data.addColumn('number', 'Appreciations');
+  data.addColumn('number', 'Comments');
+  for (var i = 0; i < projectIDs.length; i++) {
+    data.addRow([artistName[i], workName[i], views[i], appreciations[i], comments[i]]);
+  }
 
-    var table = new google.visualization.Table(document.getElementById('table-div'));
+  var table = new google.visualization.Table(document.getElementById('table-div'));
 
-    table.draw(data, options);
+  table.draw(data, options);
 }
