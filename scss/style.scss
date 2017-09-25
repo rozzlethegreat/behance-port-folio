@@ -47,6 +47,8 @@ float: left;
 }
 
 
+
+
 .info{
   width: 45%;
   margin: 20px auto;
@@ -68,17 +70,17 @@ float: left;
 }
 
 .topText {
-  height: 30px;
+  height: 60px;
   font-size: 1.5em;
 }
 
 .boldText {
-  width: 400px;
   font-size: 1.5em;
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
 
 .block{
   width: 150px;
@@ -539,4 +541,23 @@ height: 0;
 padding-top: 66.65%;
 background-size: contain;
 background-repeat: no-repeat;
+}
+.font-family{
+  font-family: 'Oxygen', sans-serif;
+}
+
+.title-style {
+  font-weight: bold;
+  font-size: 15px;
+  color: #0000ff;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 3px;
+}
+
+.red-color{
+  background-color: rgba(218, 25, 50, 0.08);
+}
+
+.selected {
+  font-weight: bold;
 }

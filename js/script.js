@@ -1,4 +1,5 @@
 var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity;
+var artistName = [], workName = [], views = [], appreciations = [], comments = [];
 var designerIDs = new Array();
 var projectIDs = new Array();
 var projectIdss;
@@ -131,6 +132,19 @@ function getProjects() {
           getProjectImg();
         };
 
+        var sArtistName = DataFromJson.projects[0].owners[0].display_name;
+var sViews = DataFromJson.projects[0].stats.views;
+var sAppreciations = DataFromJson.projects[0].stats.appreciations;
+var sComments = DataFromJson.projects[0].stats.comments;
+var sName = DataFromJson.projects[0].name;
+console.log(artistName[1]);
+artistName.push(sArtistName);
+views.push(sViews);
+appreciations.push(sAppreciations);
+comments.push(sComments);
+workName.push(sName);
+google.charts.load('current', {'packages':['table']});
+google.charts.setOnLoadCallback(drawTable);
 
       },
       error: function() {
@@ -276,4 +290,30 @@ function getimg(){
       }
 
   })
+}
+
+function drawTable() {
+    var cssClassNames = {
+        'headerRow': 'font-family title-style',
+        'tableRow': 'font-family',
+        'oddTableRow': 'font-family',
+        'selectedTableRow': 'selected',
+        'hoverTableRow': 'red-color'
+        };
+
+
+    var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Artist');
+    data.addColumn('string', 'Work');
+    data.addColumn('number', 'Views');
+    data.addColumn('number', 'Appreciations');
+    data.addColumn('number', 'Comments');
+    for (var i = 0; i < projectIDs.length; i++) {
+        data.addRow([artistName[i], workName[i], views[i], appreciations[i], comments[i]]);
+    }
+
+    var table = new google.visualization.Table(document.getElementById('table-div'));
+
+    table.draw(data, options);
 }
