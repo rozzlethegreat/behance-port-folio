@@ -443,9 +443,13 @@ background-color: rgba(0, 0, 0, 0.9);
   .dets{
       margin-left: 50vw;
   }
+
   .project{
-    min-width: 350px;
-    margin: 30px;
+    height: 63vh;
+
+margin: 0;
+margin-bottom: 4px;
+
   }
 }
 @media only screen and (max-width: 800px) {
@@ -456,6 +460,8 @@ background-color: rgba(0, 0, 0, 0.9);
         width: 100vw;
     }
 }
+
+
 .Dets {
 
     position: absolute;
@@ -463,7 +469,7 @@ background-color: rgba(0, 0, 0, 0.9);
     /* margin-top: 239px; */
     /* margin-left: 23vw; */
     height: 500px;
-    width: 33.4vw;
+    width: 31.4vw;
     /* z-index: 45; */
     font-family: 'YouMurdererBB';
     /* display: flex; */
@@ -491,11 +497,11 @@ display: table;
 position: relative;
 }
 
-.remodal{
-  padding: 0px;
-  max-width: 70vw;
-  width: 70vw;
-  height: 80vh;
+.remodal {
+    padding: 0px;
+    max-width: 86vw;
+    width: 86vw;
+    height: 87vh;
 }
 .sidebar {
     width: 25%;
@@ -531,22 +537,27 @@ h4#city {
     float: left;
     overflow-y: scroll;
     position: relative;
+
 }
 .project {
-    width: 25VW;
-    height: 40VH;
-    float: left;
-    /* background-color: red; */
-    margin: 3px;
-    background-repeat: none;
-    /* min-width: 405px; */
-    /* margin: 0 auto; */
+  width: 30.4vw;
+  height: 48VH;
+  float: left;
+  opacity: 1;
+  margin: 3px;
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+ &:hover{
+   opacity: 0.5;
+   background-color: black;
+ }
 }
+
 .projectImages{
-width: 100%;
-height: 467px;
-background: no-repeat center;
-background-size: cover;
+  width: 100%;
+  height: auto;
 }
 .font-family{
   font-family: 'Oxygen', sans-serif;
@@ -566,4 +577,20 @@ background-size: cover;
 
 .selected {
   font-weight: bold;
+}
+.fa{
+  font-size: 29px;
+  margin: 20px;
+  cursor: pointer;
+}
+.fa-times {
+    float: right;
+}
+.fa-arrow-left{
+  float: left;
+  display: none;
+}
+.projectText{
+  padding-left: 100px;
+padding-right: 100px;
 }

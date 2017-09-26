@@ -1,4 +1,4 @@
-var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity;
+var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity, owner, owner2, owner3;
 var artistName = [],
   workName = [],
   views = [],
@@ -217,10 +217,22 @@ if ($('.grid-item').length > 12) {
 }
 
 function getStuff() {
-  $('.grid-item').on("click", function() {
+  $('.fa-arrow-left').on("click", function() {
+    $('.fa-arrow-left').css("display", "none");
+    $('.box').empty();
+    owner2 = owner3;
+    onClick();
+  });
+  $('.grid-item').click(onClick);
+
+  function onClick() {
+
+
     for (var i = 0; i < 12; i++) {
-      var owner = $(this).find('.Dets').html();
-      if (owner == designerIDs[i].first_name) {
+      owner = $(this).find('.Dets').html();
+      if (owner == designerIDs[i].first_name || owner2 == designerIDs[i].first_name) {
+        console.log("woo");
+        $('.box').css("background-color", "white")
         dp = designerIDs[i].images[230];
         identity = (designerIDs[i].id);
         first_name = designerIDs[i].first_name;
@@ -243,7 +255,8 @@ function getStuff() {
         projectIden = [];
         $('.box').empty();
         for (var i = 0; i < 12; i++) {
-          if (owner == projects[i].projects[0].owners[0].first_name) {
+          if (owner == projects[i].projects[0].owners[0].first_name || owner2 == projects[i].projects[0].owners[0].first_name) {
+            owner2 = "";
             for (var j = 0; j < 8; j++) {
               $('.box').append("<div class='project' style='background-image: url(" + projects[i].projects[j].covers[404] + ")'></div>");
               projectIdss = projects[i].projects[j].id;
@@ -254,13 +267,19 @@ function getStuff() {
           }
         }
         getimg();
+      } else {
+        console.log(owner);
       }
     };
-  });
+
+  }
+
+
 }
 
 function getimg() {
   $('.project').on("click", function() {
+    $('.fa-arrow-left').css("display", "block");
     var bg = $(this).css('background-image');
     bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
     for (var i = 0; i < projectIden.length; i++) {
@@ -273,15 +292,30 @@ function getimg() {
           success: function(DataFromJson) {
             $('.project').css('margin', '0px')
             console.log(DataFromJson);
+            $('#User').empty();
+            $('#User').append(DataFromJson.project.name);
+            $('#city').empty();
+            $('#city').append(DataFromJson.project.owners[0].display_name);
             $('.box').empty();
+            $('#views').empty();
+            owner3 = DataFromJson.project.owners[0].first_name;
+            $('#views').append(DataFromJson.project.stats.views);
+            $('#appris').empty();
+            $('#appris').append(DataFromJson.project.stats.appreciations);
+            $('#followers').empty();
             for (var i = 0; i < projectIden.length; i++) {
               $('.box').css("background-color", "#" + DataFromJson.project.styles.background.color);
               $('.projectItem').css("margin-bottom", DataFromJson.project.styles.spacing.modules.bottom_margin + "px");
-
+                $('.box').css("margin-top", DataFromJson.project.styles.spacing.project.top_margin + "px");
               if (DataFromJson.project.modules[i].type == "text") {
-                $('.box').append("<h1 class='projectText projectItem'>" + DataFromJson.project.modules[i].text + "</h1>")
+                $('.projectText').css('color', DataFromJson.project.styles.text.paragraph.color);
+                $('.projectText').css('font-size', DataFromJson.project.styles.text.paragraph.font_size);
+                $('.projectText').css('line-height', DataFromJson.project.styles.text.paragraph.line_height);
+                $('.projectText').css('display', DataFromJson.project.styles.text.paragraph.display);
+                $('.box').append("<p class='projectText projectItem'> "+ DataFromJson.project.modules[i].text_plain +"</p>")
+
               } else if (DataFromJson.project.modules[i].type == "image") {
-                $('.box').append("<img class='projectImages projectItem' style='background-image: url(" + DataFromJson.project.modules[i].sizes.max_1200 + ")' height='" + DataFromJson.project.modules[i].height+ "px'></img>")
+                $('.box').append("<img class='projectImages projectItem' src=" + DataFromJson.project.modules[i].sizes.max_1200 + "></img>")
               }
 
             }
