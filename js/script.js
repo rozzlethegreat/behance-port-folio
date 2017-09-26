@@ -1,4 +1,7 @@
-var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity;
+
+var pagetop, menu, yPos, logo, APIKey, DesignersProfile, identity;
+
+
 var artistName = [], workName = [], views = [], appreciations = [], comments = [];
 var designerIDs = new Array();
 var projectIDs = new Array();
@@ -10,6 +13,9 @@ $('.MenuOpen').css("display", "none");
 for (var i = 0; i < hamburger.length; i++) {
   hamburger[i]
 }
+
+
+
 window.addEventListener("scroll", yScroll);
 
 //Smooth Scrolling with in page anchors
@@ -61,15 +67,27 @@ function yScroll() {
 }
 $('#nav-icon2').click(function() {
   $('#nav-icon2').toggleClass('open');
-  console.log($('.open').length);
-  if ($('.open').length === 1) {
+  //
+  // console.log($('.open').length);
+  // if ($('.open').length === 1) {
+  //
+  //   $('.MenuOpen').css("display", "block");
+  //
+  // } else {
+  //
+  //   $('.MenuOpen').css("display", "none");
+  // }
 
-    $('.MenuOpen').css("display", "block");
+    // console.log($('.open').length);
+    if ($('.open').length === 1) {
+      $('*').css("overflow-y", "hidden");
+        $('.MenuOpen').css("display", "block");
 
-  } else {
+    }else {
+      $('*').css("overflow-y", "auto");
+        $('.MenuOpen').css("display", "none");
+    }
 
-    $('.MenuOpen').css("display", "none");
-  }
 });
 $('.grid').masonry({
   itemSelector: '.grid-item',
@@ -94,14 +112,17 @@ $.ajax({
   error: function() {
     console.log("Something Went Wrong");
   }
-})
+});
+
 var id, first_name, last_name, city, dp, projectscover
+
 
 function getRippedDesigners() {
   $.ajax({
     url: "http://www.behance.net/v2/users/" + DesignersProfile + "/following?client_id=" + APIKey,
     dataType: "jsonp",
     success: function(DataFromJson) {
+
       for (var i = 0; i < DataFromJson.following.length; i++) {
         designerIDs.push(DataFromJson.following[i]);
       };
@@ -137,7 +158,6 @@ var sViews = DataFromJson.projects[0].stats.views;
 var sAppreciations = DataFromJson.projects[0].stats.appreciations;
 var sComments = DataFromJson.projects[0].stats.comments;
 var sName = DataFromJson.projects[0].name;
-console.log(artistName[1]);
 artistName.push(sArtistName);
 views.push(sViews);
 appreciations.push(sAppreciations);
@@ -256,40 +276,56 @@ console.log(
   });
 }
 function getimg(){
-  $('.project').on("click", function(){
+  $('.project').on("click", function() {
       var bg = $(this).css('background-image');
-      bg = bg.replace('url(','').replace(')','').replace(/\"/gi, "");
+      bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
       for (var i = 0; i < projectIden.length; i++) {
-        if (bg == projectIden[i].covers[404]) {
-          console.log(projectIden[i].id);
-          var projectCode = projectIden[i].id;
-          $.ajax({
-            url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
+          if (bg == projectIden[i].covers[404]) {
+              console.log(projectIden[i].id);
+              var projectCode = projectIden[i].id;
+              $.ajax({
+                  url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
+                  dataType: "jsonp",
+                  success: function (DataFromJson) {
+                      console.log(DataFromJson);
+                      $('.box').empty();
+                      for (var i = 0; i < projectIden.length; i++) {
+                          var names = [];
+                          names.push(DataFromJson.project.modules[i]);
+                          var found_names = $.grep(names, function (v) {
+                              return v.type === "image";
+                          });
+                          console.log(found_names);
+                          $('.box').append("<img class='projectImages' style='background-image: url(" + found_names[i].sizes.max_1200 + ")'></img>")
+                      }
+
+                  }
+              })
+          }
+      }
+  })
+}
+
+function getProjectImg(){
+    for (var i = 0; i < projectIDs.length; i++) {
+        $.ajax({
+            url: "http://www.behance.net/v2/projects/"+projectIDs[i]+"?client_id=" + APIKey,
             dataType: "jsonp",
             success: function(DataFromJson) {
-              console.log(DataFromJson);
-              $('.box').empty();
-              for (var i = 0; i < projectIden.length; i++) {
-                var names = [];
-                names.push(DataFromJson.project.modules[i]);
-                var found_names = $.grep(names, function(v) {
-                  return v.type === "image";
-                });
-                console.log(found_names);
-                $('.box').append("<img class='projectImages' style='background-image: url(" + found_names[i].sizes.max_1200+ ")'></img>")
-              }
+                $('.grid').append("<div class='grid-item img-tag' data-toggle='modal' data-target='#myModal'>" +
+                    "<img class='grid-item img-tag' style='background-image: url("+DataFromJson.project.covers.original+")'></div>");
+                if ($('.grid-item').length > 11) {
+                    hoverEffect();
+                }
 
             },
             error: function() {
-              console.log("Something Went Wrong");
+                console.log("Something Went Wrong");
 
             }
 
-          })
-        }
-      }
-
-  })
+        })
+    }
 }
 
 
@@ -336,4 +372,59 @@ $("#show").click(function(){
     $("#table-div").css("display", "block");
     $("#show").css("display", "none");
 });
+
+function hoverEffect() {
+    var boxes = document.querySelectorAll('.grid-item');
+
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].style.height = boxes[i].offsetWidth + 'px';
+        boxes[i].addEventListener("mouseenter", function (e) {
+            TweenMax.to(e.target.querySelector('img'), 10, {
+                scale: "1.15"
+            });
+        });
+        boxes[i].addEventListener("mouseleave", function (e) {
+            TweenMax.to(e.target.querySelector('img'), 0.9, {
+                scale: "1"
+            });
+        });
+
+    }
+}
+
+$(document).on("mouseenter", ".img-tag", function() {
+    $(this).css('background-color', '#000');
+    $(this).css('opacity', '0.6');
+    $(this).css('transition', 'opacity 2s ease');
+});
+
+$(document).on("mouseout", ".img-tag", function() {
+    $(this).css('opacity', '1');
+});
+
+function drawTable() {
+    var cssClassNames = {
+        'headerRow': 'font-family title-style',
+        'tableRow': 'font-family',
+        'oddTableRow': 'font-family',
+        'selectedTableRow': 'selected',
+        'hoverTableRow': 'red-color'
+        };
+
+
+    var options = {'showRowNumber': true, 'allowHtml': true, 'cssClassNames': cssClassNames};
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Artist');
+    data.addColumn('string', 'Work');
+    data.addColumn('number', 'Views');
+    data.addColumn('number', 'Appreciations');
+    data.addColumn('number', 'Comments');
+    for (var i = 0; i < projectIDs.length; i++) {
+        data.addRow([artistName[i], workName[i], views[i], appreciations[i], comments[i]]);
+    }
+
+    var table = new google.visualization.Table(document.getElementById('table-div'));
+
+    table.draw(data, options);
+}
 
