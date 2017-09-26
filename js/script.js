@@ -250,7 +250,7 @@ function getStuff() {
         $('#User').empty();
         $('#User').append(first_name + " " + last_name);
         $('#city').empty();
-        $('#city').append(city);
+        $('#city').append("<i class='fa fa-map-marker'></i><p class='city'>"+city+"</p>");
         $('#views').empty();
         $('#views').append(views);
         $('#appris').empty();

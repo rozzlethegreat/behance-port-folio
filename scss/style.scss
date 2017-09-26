@@ -540,6 +540,7 @@ h1#User {
   margin-top: 5%;
   font-family: 'Raleway';
   color: BLACK;
+  margin-bottom: 27px;
 }
 
 h4#city {
@@ -648,9 +649,25 @@ i.fa.fa-behance {
   }
 }
 
+
 .bText {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   font-family: 'Raleway';
+}
+.fa-map-marker{
+  margin: 0px;
+  float: left;
+}
+p.city {
+
+    margin-top: 5px;
+}
+h4#city {
+    font-family: 'Raleway';
+    margin-top: 14%;
+    text-align: center;
+    margin: 0 auto;
+    width: 32%;
 }
