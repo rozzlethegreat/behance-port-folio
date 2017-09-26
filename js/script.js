@@ -1,4 +1,4 @@
-var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity, owner, owner2, owner3;
+var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity, owner, owner2, owner3, url, url2;
 var artistName = [],
   workName = [],
   views = [],
@@ -28,7 +28,7 @@ $("a").on('click', function(event) {
 
     var hash = this.hash;
 
-    console.log(hash);
+
     $('html, body').animate({
       scrollTop: $(hash).offset().top
     }, 800, function() {
@@ -65,7 +65,7 @@ function yScroll() {
 }
 $('#nav-icon2').click(function() {
   $('#nav-icon2').toggleClass('open');
-  console.log($('.open').length);
+
   if ($('.open').length === 1) {
 
     $('.MenuOpen').css("display", "block");
@@ -231,7 +231,6 @@ function getStuff() {
     for (var i = 0; i < 12; i++) {
       owner = $(this).find('.Dets').html();
       if (owner == designerIDs[i].first_name || owner2 == designerIDs[i].first_name) {
-        console.log("woo");
         $('.box').css("background-color", "white")
         dp = designerIDs[i].images[230];
         identity = (designerIDs[i].id);
@@ -241,7 +240,13 @@ function getStuff() {
         followers = designerIDs[i].stats.followers;
         appris = designerIDs[i].stats.appreciations;
         views = designerIDs[i].stats.views;
-        $('.circlePic').css("background-image", "url(" + dp + ")");
+        $('.circlePic').empty();
+        if (dp !== undefined) {
+          $('.circlePic').css("background-image", "url(" + dp + ")");
+        }
+        $('.bText').empty();
+        $('.bText').append('View Profile');
+
         $('#User').empty();
         $('#User').append(first_name + " " + last_name);
         $('#city').empty();
@@ -254,6 +259,12 @@ function getStuff() {
         $('#followers').append(followers);
         projectIden = [];
         $('.box').empty();
+
+
+
+        url = designerIDs[i].url
+
+
         for (var i = 0; i < 12; i++) {
           if (owner == projects[i].projects[0].owners[0].first_name || owner2 == projects[i].projects[0].owners[0].first_name) {
             owner2 = "";
@@ -267,8 +278,12 @@ function getStuff() {
           }
         }
         getimg();
-      } else {
-        console.log(owner);
+        $('.fa-behance').on("click", function(){
+          window.location.href = url;
+        });
+        $('.button').on("click", function(){
+          window.location.href = url;
+        });
       }
     };
 
@@ -284,14 +299,14 @@ function getimg() {
     bg = bg.replace('url(', '').replace(')', '').replace(/\"/gi, "");
     for (var i = 0; i < projectIden.length; i++) {
       if (bg == projectIden[i].covers[404]) {
-
         var projectCode = projectIden[i].id;
         $.ajax({
           url: "http://www.behance.net/v2/projects/" + projectCode + "?client_id=" + APIKey,
           dataType: "jsonp",
           success: function(DataFromJson) {
             $('.project').css('margin', '0px')
-            console.log(DataFromJson);
+            $('.bText').empty();
+            $('.bText').append('View Project');
             $('#User').empty();
             $('#User').append(DataFromJson.project.name);
             $('#city').empty();
@@ -303,24 +318,31 @@ function getimg() {
             $('#appris').empty();
             $('#appris').append(DataFromJson.project.stats.appreciations);
             $('#followers').empty();
-            for (var i = 0; i < projectIden.length; i++) {
+              $('.projectText').css('color', 'black');
+                $('.projectText').css("margin-top", "0px");
+                url2 = DataFromJson.project.url;
+                $('.button').on("click", function(){
+                  window.location.href = url2;
+                });
+            for (var i = 0; i < DataFromJson.project.modules.length; i++) {
+
               $('.box').css("background-color", "#" + DataFromJson.project.styles.background.color);
               $('.projectItem').css("margin-bottom", DataFromJson.project.styles.spacing.modules.bottom_margin + "px");
-                $('.box').css("margin-top", DataFromJson.project.styles.spacing.project.top_margin + "px");
+
               if (DataFromJson.project.modules[i].type == "text") {
                 $('.projectText').css('color', DataFromJson.project.styles.text.paragraph.color);
                 $('.projectText').css('font-size', DataFromJson.project.styles.text.paragraph.font_size);
                 $('.projectText').css('line-height', DataFromJson.project.styles.text.paragraph.line_height);
-                $('.projectText').css('display', DataFromJson.project.styles.text.paragraph.display);
-                $('.box').append("<p class='projectText projectItem'> "+ DataFromJson.project.modules[i].text_plain +"</p>")
-
+                $('.box').append("<p class='projectText projectItem'> "+ DataFromJson.project.modules[i].text_plain +"</p>");
+                $('.projectText').css("margin-top", DataFromJson.project.styles.spacing.project.top_margin + "px");
               } else if (DataFromJson.project.modules[i].type == "image") {
-                $('.box').append("<img class='projectImages projectItem' src=" + DataFromJson.project.modules[i].sizes.max_1200 + "></img>")
+                if (DataFromJson.project.modules[i].sizes.max_1200 !== undefined) {
+                  $('.box').append("<img class='projectImages projectItem' src=" + DataFromJson.project.modules[i].sizes.max_1200 + "></img>")
+                }
               }
 
-            }
-
-          },
+          }
+        },
           error: function() {
             console.log("Something Went Wrong");
 
@@ -331,6 +353,9 @@ function getimg() {
     }
 
   })
+
+
+
 }
 
 function drawTable() {

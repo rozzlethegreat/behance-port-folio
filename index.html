@@ -1,118 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Ripped Design</title>
-    <link rel="stylesheet" href="node_modules/remodal/dist/remodal.css">
-    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="node_modules/remodal/dist/remodal-default-theme.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Raleway:100,200,300,400,900" rel="stylesheet">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta charset="UTF-8">
+  <title>Ripped Design</title>
+  <link rel="stylesheet" href="node_modules/remodal/dist/remodal.css">
+  <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="node_modules/remodal/dist/remodal-default-theme.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700|Raleway:100,200,300,400,900" rel="stylesheet">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 </head>
+
 <body>
 
   <div class="MenuOpen">
-    <h1 class="menuH1"><a href="#HomescreenMenu">Home</a></h1>
-    <h1 class="menuH1"><a href="#aboutIdMenu">About</a></h1>
-    <h1 class="menuH1"><a href="#TeamDivMenu">Our Work</a></h1>
+    <h1 class="menuH1"><a class="hLink" href="#HomescreenMenu">Home</a></h1>
+    <h1 class="menuH1"><a class="hLink" href="#aboutIdMenu">About</a></h1>
+    <h1 class="menuH1"><a class="hLink" href="#TeamDivMenu">Our Work</a></h1>
   </div>
 
-    <div id="pagetop">
-        <h1 id="logo" class="aligned">Ripped</h1>
-        <div id="Ham" class="aligned">
-            <div id="nav-icon2" >
-            <span class="spanner"></span>
-            <span class="spanner"></span>
-            <span class="spanner"></span>
-            <span class="spanner"></span>
-            <span class="spanner"></span>
-            <span class="spanner"></span>
-            </div>
+  <div id="pagetop">
+    <h1 id="logo" class="aligned">Ripped</h1>
+    <div id="Ham" class="aligned">
+      <div id="nav-icon2">
+        <span class="spanner"></span>
+        <span class="spanner"></span>
+        <span class="spanner"></span>
+        <span class="spanner"></span>
+        <span class="spanner"></span>
+        <span class="spanner"></span>
+      </div>
 
-        </div>
     </div>
+  </div>
 
-    <div class="Homescreen" id="HomescreenMenu"></div>
-    <div class="randomDiv" id="aboutIdMenu">
-        <div class="aligned info">
-            <div class="smallText">
-                <p id="textsmall">Ripped a company based in Wellington New Zealand, we are displaying the design projects of multiple designers via the behance portfolio website.
-                Feel free to checkout the artists complete works of those you like by clicking the link in the description.</p>
-            </div>
-            <div class="bigText">
-                <div class="topText">"Seeing is believing."</div>
-                <div class="boldText">We're excited to be delivering the unique work from artists around the world.</div>
-                <div class="block"></div>
-            </div>
-        </div>
+  <div class="Homescreen" id="HomescreenMenu"></div>
+  <div class="randomDiv" id="aboutIdMenu">
+    <div class="aligned info">
+      <div class="smallText">
+        <p id="textsmall">Ripped a company based in Wellington New Zealand, we are displaying the design projects of multiple designers via the behance portfolio website. Feel free to checkout the artists complete works of those you like by clicking the link in the description.</p>
+      </div>
+      <div class="bigText">
+        <div class="topText">"Seeing is believing."</div>
+        <div class="boldText">We're excited to be delivering the unique work from artists around the world.</div>
+        <div class="block"></div>
+      </div>
     </div>
+  </div>
 
-    <div class="qouteDiv">
+  <div class="qouteDiv">
 
-        <div class="fullscreen-bg">
-            <video loop muted autoplay poster="img/videoPoster.png" class="fullscreen-bg__video">
+    <div class="fullscreen-bg">
+      <video loop muted autoplay poster="img/videoPoster.png" class="fullscreen-bg__video">
             <source src="img/RippedVid.mp4" type="video/mp4">
             </video>
-            <div class="overlay aligned">
-                <h1 id="VidText">Turning your vision into a reality.</h1>
-            </div>
-        </div>
+      <div class="overlay aligned">
+        <h1 id="VidText">Turning your vision into a reality.</h1>
+      </div>
     </div>
-    <div class="TeamDiv" id="TeamDivMenu">
-        <h1 id="teamH1" class="aligned">Our Work</h1>
-        <div id="table-div"></div>
-        <hr class="projectsHr">
+  </div>
+  <div class="TeamDiv" id="TeamDivMenu">
+    <h1 id="teamH1" class="aligned">Our Work</h1>
+    <div id="table-div"></div>
+    <hr class="projectsHr">
+  </div>
+
+  <div class="work">
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 160 }'></div>
+  </div>
+
+  <div class="footer">
+    <h4 class="footer-head">Ripped</h4>
+    <div id="footer-text">
+      <p id="copyright">Copyright 2017</p>
+      <a data-remodal-target="modal">Call the modal with data-remodal-id="modal"</a>
+      <div class="block2"></div>
     </div>
-
-    <div class="work">
-        <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 160 }'></div>
-    </div>
-
-    <div class="footer">
-        <h4 class="footer-head">Ripped</h4>
-        <div id="footer-text">
-            <p id="copyright">Copyright 2017</p>
-        <a data-remodal-target="modal">Call the modal with data-remodal-id="modal"</a>
-            <div class="block2"></div>
-        </div>
-        <div class="author">
-            <p>Site by Elliot Sturzaker and Rosalind Cervante for educational purposes.</p>
-        </div>
-
+    <div class="author">
+      <p>Site by Elliot Sturzaker and Rosalind Cervante for educational purposes.</p>
     </div>
 
-
-
-
-
-    <div class="remodal" data-remodal-id="modal">
-  <button data-remodal-action="close"></button>
-<div class="box">
-
-</div>
-  <div class="sidebar">
-    <i class="fa fa-arrow-left"></i>
-    <i class="fa fa-times" data-remodal-action="close"></i>
-    <div class="circlePic">
-
-    </div>
-    <h1 id="User"></h1>
-    <h4 id="city"></h4>
-    <h5 id="views"></h5>
-    <h5 id="appris"></h5>
-    <h5 id="followers"></h5>
   </div>
 
 
-</div>
 
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
-    <script src="node_modules/gsap/src/minified/TweenMax.min.js"></script>
-        <script type="text/javascript" src="js/script.min.js"></script>
-<script src="node_modules/remodal/dist/remodal.min.js"></script>
+
+
+  <div class="remodal" data-remodal-id="modal">
+    <button data-remodal-action="close"></button>
+    <div class="box">
+
+    </div>
+    <div class="sidebar">
+
+      <i class="fa fa-arrow-left"></i>
+      <i class="fa fa-times" data-remodal-action="close"></i>
+      <i class="fa fa-behance"></i>
+      <div class="circlePic">
+
+      </div>
+
+
+
+      <h1 id="User"></h1>
+      <h4 id="city"></h4>
+      <h5 id="views"></h5>
+      <h5 id="appris"></h5>
+      <h5 id="followers"></h5>
+      <div class="button">
+        <p class="bText">
+          View profile</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <script src="node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script>
+  <script src="js/TweenMax.js"></script>
+  <script type="text/javascript" src="js/script.min.js"></script>
+  <script src="node_modules/remodal/dist/remodal.min.js"></script>
 
 </body>
+
 </html>
