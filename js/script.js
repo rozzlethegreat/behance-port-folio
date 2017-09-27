@@ -1,3 +1,7 @@
+
+
+
+
 var pagetop, menu, yPos, logo, APIKey, DesignersProfile, first_name, last_name, city, identity, owner, owner2, owner3, url, url2;
 var artistName = [],
   workName = [],
@@ -80,6 +84,7 @@ $('.grid').masonry({
   columnWidth: 200
 });
 // ***REQUESTS*** //
+
 $.ajax({
   url: "./config.json",
   dataType: "json",
@@ -237,26 +242,35 @@ function getStuff() {
         first_name = designerIDs[i].first_name;
         last_name = designerIDs[i].last_name;
         city = designerIDs[i].city;
-        followers = designerIDs[i].stats.followers;
-        appris = designerIDs[i].stats.appreciations;
-        views = designerIDs[i].stats.views;
+        followers = designerIDs[i].stats.followers.toLocaleString(
+          undefined,{minimumFractionDigits: 0}
+        );
+        appris = designerIDs[i].stats.appreciations.toLocaleString(
+          undefined,{minimumFractionDigits: 0}
+        );
+        views = designerIDs[i].stats.views.toLocaleString(
+          undefined,{minimumFractionDigits: 0}
+        );
         $('.circlePic').empty();
         if (dp !== undefined) {
           $('.circlePic').css("background-image", "url(" + dp + ")");
+        } else {
+          return;
         }
-        $('.bText').empty();
-        $('.bText').append('View Profile');
+        $('#changed').empty();
+        $('#changed').append('View Profile');
 
         $('#User').empty();
         $('#User').append(first_name + " " + last_name);
+
         $('#city').empty();
-        $('#city').append("<i class='fa fa-map-marker'></i><p class='city'>"+city+"</p>");
+        $('#city').append("<i class='fa fa-map-marker icons'></i><p class='city'>" + city + "</p>");
         $('#views').empty();
-        $('#views').append(views);
+        $('#views').append("<i class='fa fa-eye icons'></i><p class='city'>" + views + "</p>");
         $('#appris').empty();
-        $('#appris').append(appris);
+        $('#appris').append("<i class='fa fa-heart icons'></i><p class='city'>" + appris + "</p>");
         $('#followers').empty();
-        $('#followers').append(followers);
+        $('#followers').append("<i class='fa fa-users icons'></i><p class='city'>" + followers + "</p>");
         projectIden = [];
         $('.box').empty();
 
@@ -278,10 +292,10 @@ function getStuff() {
           }
         }
         getimg();
-        $('.fa-behance').on("click", function(){
+        $('.fa-behance').on("click", function() {
           window.location.href = url;
         });
-        $('.button').on("click", function(){
+        $('#sendTo').on("click", function() {
           window.location.href = url;
         });
       }
@@ -305,25 +319,35 @@ function getimg() {
           dataType: "jsonp",
           success: function(DataFromJson) {
             $('.project').css('margin', '0px')
-            $('.bText').empty();
-            $('.bText').append('View Project');
+            $('#changed').empty();
+            $('#changed').append('View Project');
             $('#User').empty();
             $('#User').append(DataFromJson.project.name);
+
+            appris = DataFromJson.project.stats.appreciations.toLocaleString(
+              undefined,{minimumFractionDigits: 0}
+            );
+            views =  DataFromJson.project.stats.views.toLocaleString(
+              undefined,{minimumFractionDigits: 0}
+            );
             $('#city').empty();
-            $('#city').append(DataFromJson.project.owners[0].display_name);
-            $('.box').empty();
+            $('#city').append("<p class='city'>"+DataFromJson.project.owners[0].display_name+"</p>");
             $('#views').empty();
-            owner3 = DataFromJson.project.owners[0].first_name;
-            $('#views').append(DataFromJson.project.stats.views);
+            $('#views').append("<i class='fa fa-eye icons'></i><p class='city'>" + views + "</p>");
             $('#appris').empty();
-            $('#appris').append(DataFromJson.project.stats.appreciations);
+            $('#appris').append("<i class='fa fa-heart icons'></i><p class='city'>" + appris + "</p>");
+            $('.box').empty();
+
+            owner3 = DataFromJson.project.owners[0].first_name;
+
+
             $('#followers').empty();
-              $('.projectText').css('color', 'black');
-                $('.projectText').css("margin-top", "0px");
-                url2 = DataFromJson.project.url;
-                $('.button').on("click", function(){
-                  window.location.href = url2;
-                });
+            $('.projectText').css('color', 'black');
+            $('.projectText').css("margin-top", "0px");
+            url2 = DataFromJson.project.url;
+            $('#sendTo').on("click", function() {
+              window.location.href = url2;
+            });
             for (var i = 0; i < DataFromJson.project.modules.length; i++) {
 
               $('.box').css("background-color", "#" + DataFromJson.project.styles.background.color);
@@ -333,7 +357,7 @@ function getimg() {
                 $('.projectText').css('color', DataFromJson.project.styles.text.paragraph.color);
                 $('.projectText').css('font-size', DataFromJson.project.styles.text.paragraph.font_size);
                 $('.projectText').css('line-height', DataFromJson.project.styles.text.paragraph.line_height);
-                $('.box').append("<p class='projectText projectItem'> "+ DataFromJson.project.modules[i].text_plain +"</p>");
+                $('.box').append("<p class='projectText projectItem'> " + DataFromJson.project.modules[i].text_plain + "</p>");
                 $('.projectText').css("margin-top", DataFromJson.project.styles.spacing.project.top_margin + "px");
               } else if (DataFromJson.project.modules[i].type == "image") {
                 if (DataFromJson.project.modules[i].sizes.max_1200 !== undefined) {
@@ -341,8 +365,8 @@ function getimg() {
                 }
               }
 
-          }
-        },
+            }
+          },
           error: function() {
             console.log("Something Went Wrong");
 
@@ -387,3 +411,15 @@ function drawTable() {
 
   table.draw(data, options);
 }
+$('#statsButton').on("click", function(){
+  $('#table-div').css("display", "block");
+  $('.footer').css("height", "40vh")
+$('#statsButton').css("display", "none");
+$('#HideButton').css("display", "block");
+})
+$('#HideButton').on("click", function(){
+  $('#table-div').css("display", "none");
+  $('.footer').css("height", "25vh")
+$('#HideButton').css("display", "none");
+$('#statsButton').css("display", "block");
+});

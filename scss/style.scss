@@ -14,11 +14,38 @@ body {
 .Homescreen {
   width: $fullWidth;
   height: $fullHeight;
-  background-image: url('img/vers3.jpg');
+  background-image: url('img/tes2t.png');
   background-repeat: no-repeat;
   background-size: cover;
+  position: absolute;
+    top: 0;
+}
+.screener {
+    background: linear-gradient(270deg, #f30000, #000000, #ff0052, #1100f7);
+    background-size: 800% 800%;
+    -webkit-animation: AnimationName 45s ease infinite;
+    -moz-animation: AnimationName 45s ease infinite;
+    animation: AnimationName 45s ease infinite;
+    width: 100vw;
+    /* opacity: 0.7; */
+    height: 100vh;
 }
 
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 .Menu {
   background-color: transparent;
   position: fixed;
@@ -72,14 +99,13 @@ body {
 }
 
 .topText {
-  height: 60px;
+  height: 40px;
   font-size: 1.5em;
 }
 
 .boldText {
   font-size: 1.5em;
   font-weight: 700;
-  margin-top: 20px;
   margin-bottom: 10px;
 }
 
@@ -396,20 +422,21 @@ a.hLink:hover {
 }
 
 #copyright {
-  font-size: 1.2em;
+  font-size: 0.8em;
   font-family: 'Oxygen', sans-serif;
 }
 
 .block2 {
   width: 250px;
-  height: 7px;
+  height: 4px;
   background-color: #DA1932;
   display: inline-block;
+  display: none;
 }
 
 #footer-text {
   position: relative;
-  top: 70px;
+  top: 110px;
   margin-left: 20px;
 }
 
@@ -541,6 +568,7 @@ h1#User {
   font-family: 'Raleway';
   color: BLACK;
   margin-bottom: 27px;
+  width: auto;
 }
 
 h4#city {
@@ -620,6 +648,7 @@ h4#city {
 .projectText {
   padding-left: 100px;
   padding-right: 100px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 i.fa.fa-behance {
@@ -656,18 +685,38 @@ i.fa.fa-behance {
   transform: translateY(-50%);
   font-family: 'Raleway';
 }
-.fa-map-marker{
+.icons{
   margin: 0px;
   float: left;
+  font-size: 23px;
+  cursor: default;
+  &:hover{
+    color: inherit;
+  }
 }
 p.city {
-
+  margin-bottom: 10px;
     margin-top: 5px;
 }
-h4#city {
+.iconText {
     font-family: 'Raleway';
     margin-top: 14%;
     text-align: center;
     margin: 0 auto;
     width: 32%;
+}
+div#statsButton {
+    width: 200px;
+    float: right;
+    margin-right: 58px;
+
+}
+div#table-div {
+    display: none;
+}
+#HideButton{
+  display: none;
+  width: 200px;
+  float: right;
+  margin-right: 58px;
 }
