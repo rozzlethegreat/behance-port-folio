@@ -18,34 +18,58 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   position: absolute;
-    top: 0;
-}
-.screener {
-background: linear-gradient(270deg, #DA1932, #890be9, #ff0052, #DA1932);
-    background-size: 2500% 2500%;
-    -webkit-animation: AnimationName 30s ease infinite;
-    -moz-animation: AnimationName 30s ease infinite;
-    animation: AnimationName 30s ease infinite;
-    width: 100vw;
-    /* opacity: 0.7; */
-    height: 100vh;
+  top: 0;
 }
 
+.screener {
+  background: linear-gradient(270deg, #DA1932, #890be9, #ff0052, #DA1932);
+  background-size: 2500% 2500%;
+  -webkit-animation: AnimationName 30s ease infinite;
+  -moz-animation: AnimationName 30s ease infinite;
+  animation: AnimationName 30s ease infinite;
+  width: 100vw;
+  height: 100vh;
+}
 @-webkit-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
 @-moz-keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
 @keyframes AnimationName {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+  0% {
+    background-position: 0 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
 }
+
 .Menu {
   background-color: transparent;
   position: fixed;
@@ -340,13 +364,13 @@ background: linear-gradient(270deg, #DA1932, #890be9, #ff0052, #DA1932);
   max-height: auto;
   height: auto !important;
 }
-/* clearfix */
+
 .grid:after {
   content: '';
   display: block;
   clear: both;
 }
-/* ---- grid-item ---- */
+
 .grid-item {
   width: 33.4vw !important;
   height: 500px !important;
@@ -394,17 +418,16 @@ a {
   font-weight: 400;
   font-size: 115px;
   text-align: center;
-
 }
 
 a {
   text-decoration: none;
 }
+
 a.hLink:hover {
-    color: white;
-    transition: 1s ease;
+  color: white;
+  transition: 1s ease;
 }
-//FOOTER
 
 .footer {
   height: 25vh;
@@ -505,24 +528,14 @@ a.hLink:hover {
 
 .Dets {
   position: absolute;
-  /* text-align: center; */
-  /* margin-top: 239px; */
-  /* margin-left: 23vw; */
   height: 500px;
   width: 31.4vw;
-  /* z-index: 45; */
   font-family: 'YouMurdererBB';
-  /* display: flex; */
   color: white;
-  /* text-align: center; */
-  /* align-items: center; */
   font-size: 80px;
   font-weight: 100;
   vertical-align: middle;
-  /* opacity: 0.5; */
   margin: 0 auto;
-  /* left: 0px; */
-  /* position: absolute; */
   right: 0;
   left: 0;
   top: 50%;
@@ -661,10 +674,7 @@ i.fa.fa-behance {
   height: 45px;
   text-align: center;
   border-radius: 25px;
-  /* position: relative; */
-  /* top: 50%; */
   margin: 0 auto;
-  /* transform: translateY(-50%); */
   cursor: pointer;
   margin-top: 60px;
 
@@ -678,43 +688,48 @@ i.fa.fa-behance {
   }
 }
 
-
 .bText {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   font-family: 'Raleway';
 }
-.icons{
-  margin: 0px;
+
+.icons {
+  margin: 0;
   float: left;
   font-size: 23px;
   cursor: default;
-  &:hover{
+
+  &:hover {
     color: inherit;
   }
 }
+
 p.city {
   margin-bottom: 10px;
-    margin-top: 5px;
+  margin-top: 5px;
 }
-.iconText {
-    font-family: 'Raleway';
-    margin-top: 14%;
-    text-align: center;
-    margin: 0 auto;
-    width: 32%;
-}
-div#statsButton {
-    width: 200px;
-    float: right;
-    margin-right: 58px;
 
+.iconText {
+  font-family: 'Raleway';
+  margin-top: 14%;
+  text-align: center;
+  margin: 0 auto;
+  width: 32%;
 }
+
+div#statsButton {
+  width: 200px;
+  float: right;
+  margin-right: 58px;
+}
+
 div#table-div {
-    display: none;
+  display: none;
 }
-#HideButton{
+
+#HideButton {
   display: none;
   width: 200px;
   float: right;
