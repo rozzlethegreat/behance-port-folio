@@ -199,7 +199,10 @@ function getStuff() {
   });
   $('.grid-item').click(onClick);
 
+
   function onClick() {
+    $('.box').empty();
+    $('.fa-arrow-left').css('display', 'none');
     for (var i = 0; i < 12; i++) {
       owner = $(this).find('.Dets').html();
       if (owner == designerIDs[i].first_name || owner2 == designerIDs[i].first_name) {
